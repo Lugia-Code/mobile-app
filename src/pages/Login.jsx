@@ -7,15 +7,28 @@ import {
   TouchableOpacity,
   View,
   Text,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Btn from "../components/Btn";
 
 export default function Login({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
+  };
+
+  const handleLogin = () => {
+    if (email === "funcionario@mottu.com" && password === "organiza") {
+      setError("");
+      navigation.navigate("Tabs");
+    } else {
+      setError("Email ou senha inválidos.");
+    }
   };
 
   return (
@@ -36,6 +49,9 @@ export default function Login({ navigation }) {
             placeholderTextColor="#666"
             textContentType="emailAddress"
             keyboardType="email-address"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="Digite seu email"
           />
           <View style={styles.underline} />
         </View>
@@ -48,6 +64,9 @@ export default function Login({ navigation }) {
               secureTextEntry={hidePassword}
               textContentType="password"
               placeholderTextColor="#666"
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Digite sua senha"
             />
             <TouchableOpacity
               onPress={togglePasswordVisibility}
@@ -63,7 +82,9 @@ export default function Login({ navigation }) {
           <View style={styles.underline} />
         </View>
 
-        <Btn txt="Entrar" />
+        {error !== "" && <Text style={styles.errorText}>{error}</Text>}
+
+        <Btn txt="Entrar" pressFunc={handleLogin} />
       </View>
     </SafeAreaView>
   );
@@ -121,5 +142,11 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "#F97316",
     marginTop: 5,
+  },
+  errorText: {
+    color: "#f87171", // vermelho claro
+    textAlign: "center",
+    marginBottom: 20,
+    fontSize: 14,
   },
 });

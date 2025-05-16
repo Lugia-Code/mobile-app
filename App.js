@@ -2,9 +2,53 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/pages/Login";
+import ProcurarMoto from "./src/pages/ProcurarMoto";
+import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import CadastrarMoto from "./src/pages/CadastrarMoto";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+function Tabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: "#000",
+        tabBarInactiveTintColor: "#444444",
+        tabBarStyle: {
+          height: 60,
+          paddingBottom: 1,
+          paddingHorizontal: 2,
+        },
+
+        headerShown: false,
+      }}
+    >
+      <Tab.Screen
+        name="ProcurarMoto"
+        component={ProcurarMoto}
+        options={{
+          tabBarIcon: () => <Ionicons name="search" size={26} color="#000" />,
+          tabBarLabel: "Procurar Moto",
+          tabBarActiveBackgroundColor: "#10B981",
+          tabBarInactiveBackgroundColor: "#F97316",
+        }}
+      />
+      <Tab.Screen
+        name="CadastrarMoto"
+        component={CadastrarMoto}
+        options={{
+          tabBarIcon: () => (
+            <MaterialCommunityIcons name="plus" size={33} color="#000" />
+          ),
+          tabBarLabel: "Adicionar moto",
+          tabBarActiveBackgroundColor: "#10B981",
+          tabBarInactiveBackgroundColor: "#F97316",
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -13,6 +57,11 @@ export default function App() {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
