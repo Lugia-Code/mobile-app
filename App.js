@@ -6,6 +6,7 @@ import ProcurarMoto from "./src/pages/ProcurarMoto";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import CadastrarMoto from "./src/pages/CadastrarMoto";
 import Patio from "./src/pages/Patio";
+import Participantes from "./src/pages/Participantes";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -55,6 +56,18 @@ function Tabs() {
             <MaterialCommunityIcons name="plus" size={33} color="#000" />
           ),
           tabBarLabel: "Adicionar moto",
+          tabBarActiveBackgroundColor: "#10B981",
+          tabBarInactiveBackgroundColor: "#F97316",
+        }}
+      />
+      <Tab.Screen
+        name="Participantes"
+        component={Participantes}
+        options={{
+          tabBarIcon: () => (
+            <Ionicons name="people-sharp" size={28} color="#000" />
+          ),
+          tabBarLabel: "Integrantes",
           tabBarActiveBackgroundColor: "#10B981",
           tabBarInactiveBackgroundColor: "#F97316",
         }}
