@@ -2,11 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Setores({ nome, icone, cor }) {
+export default function Setores({ nome, icone, cor, onPressFunc }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPressFunc}>
       <Text style={styles.nome}>{nome}</Text>
-      <Ionicons name={icone} size={30} color="#d1d9e6" marginHorizontal={30} />
+      <Ionicons
+        name={icone}
+        size={30}
+        color="#d1d9e6"
+        style={{ marginHorizontal: 30 }}
+      />
       <View style={[styles.barraCor, { backgroundColor: cor }]} />
     </TouchableOpacity>
   );

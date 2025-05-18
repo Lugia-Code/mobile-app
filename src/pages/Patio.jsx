@@ -1,7 +1,7 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import Setores from "../components/Setores";
 
-export default function Patio() {
+export default function Patio({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>Patio</Text>
@@ -11,14 +11,66 @@ export default function Patio() {
           nome="Pronta para aluguel"
           icone="checkmark-circle"
           cor="green"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Pronta para aluguel" })
+          }
         />
-        <Setores nome="Pendente" icone="time-sharp" cor="yellow" />
-        <Setores nome="Sem placa" icone="close-circle" cor="white" />
-        <Setores nome="Danos estruturais graves" icone="warning" cor="red" />
-        <Setores nome="Reparo simples" icone="construct" cor="blue" />
-        <Setores nome="Agendada para manutenção" icone="calendar" cor="grey" />
-        <Setores nome="Motor defeituoso" icone="cog" cor="orange" />
-        <Setores nome="Minha Mottu" icone="person" cor="#00C853" />
+        <Setores
+          nome="Pendente"
+          icone="time-sharp"
+          cor="yellow"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Pendente" })
+          }
+        />
+        <Setores
+          nome="Sem placa"
+          icone="close-circle"
+          cor="white"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Sem placa" })
+          }
+        />
+        <Setores
+          nome="Danos estruturais graves"
+          icone="warning"
+          cor="red"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Danos estruturais graves" })
+          }
+        />
+        <Setores
+          nome="Reparo simples"
+          icone="construct"
+          cor="blue"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Reparo simples" })
+          }
+        />
+        <Setores
+          nome="Agendada para manutenção"
+          icone="calendar"
+          cor="grey"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Agendada para manutenção" })
+          }
+        />
+        <Setores
+          nome="Motor defeituoso"
+          icone="cog"
+          cor="orange"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Motor defeituoso" })
+          }
+        />
+        <Setores
+          nome="Minha Mottu"
+          icone="person"
+          cor="#00C853"
+          onPressFunc={() =>
+            navigation.navigate("Setor", { setor: "Minha Mottu" })
+          }
+        />
       </ScrollView>
     </View>
   );

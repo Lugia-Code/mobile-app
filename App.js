@@ -7,6 +7,8 @@ import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import CadastrarMoto from "./src/pages/CadastrarMoto";
 import Patio from "./src/pages/Patio";
 import Participantes from "./src/pages/Participantes";
+import Setor from "./src/pages/Setor";
+import InfoMoto from "./src/pages/InfoMoto";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -88,6 +90,16 @@ export default function App() {
         <Stack.Screen
           name="Tabs"
           component={Tabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Setor"
+          component={Setor}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="InfoMoto"
+          component={InfoMoto}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
