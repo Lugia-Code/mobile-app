@@ -9,14 +9,14 @@ export default function Patio() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Setores
           nome="Pronta para aluguel"
-          icone="thumbs-up-sharp"
+          icone="checkmark-circle"
           cor="green"
         />
         <Setores nome="Pendente" icone="time-sharp" cor="yellow" />
-        <Setores nome="Sem placa" icone="close" cor="white" />
+        <Setores nome="Sem placa" icone="close-circle" cor="white" />
         <Setores nome="Danos estruturais graves" icone="warning" cor="red" />
         <Setores nome="Reparo simples" icone="construct" cor="blue" />
-        <Setores nome="Agendada para manutenção" icone="clipboard" cor="grey" />
+        <Setores nome="Agendada para manutenção" icone="calendar" cor="grey" />
         <Setores nome="Motor defeituoso" icone="cog" cor="orange" />
         <Setores nome="Minha Mottu" icone="person" cor="#00C853" />
       </ScrollView>
