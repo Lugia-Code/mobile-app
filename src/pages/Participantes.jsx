@@ -8,19 +8,22 @@ export default function Participantes() {
       <Text style={styles.title}>Participantes</Text>
 
       <Integrantes
-        nome="Nathan Magno RM 558987"
+        nome="Nathan Magno"
+        rm="RM 558987"
         urlImage={require("../../assets/Nathan.jpg")}
         github="https://github.com/NathanMagno"
       />
 
       <Integrantes
-        nome="Júlio Cesar 557774"
+        nome="Júlio Cesar"
+        rm="RM 557774"
         urlImage={require("../../assets/Jubs.jpg")}
         github="https://github.com/JubsHereMan"
       />
 
       <Integrantes
-        nome="Erick Paschoalatto  RM 554854"
+        nome="Erick Paschoalatto"
+        rm="RM 554854"
         urlImage={require("../../assets/Erick.jpg")}
         github="https://github.com/ozerikoz"
       />

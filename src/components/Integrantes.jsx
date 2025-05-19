@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function Integrantes({ urlImage, nome, github }) {
+export default function Integrantes({ urlImage, nome, github, rm }) {
   const openUrl = (github) => {
     const url = github;
     Linking.openURL(url);
@@ -17,6 +17,7 @@ export default function Integrantes({ urlImage, nome, github }) {
     <>
       <Image style={styles.participants} source={urlImage} />
       <Text style={styles.description}>{nome}</Text>
+      <Text style={styles.description}>{rm}</Text>
       <TouchableOpacity
         style={{ marginTop: 10 }}
         title="GitHub"
