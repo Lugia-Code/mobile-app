@@ -31,3 +31,48 @@ do sistema de navegação BottomTab. O sistema possui três principais funcional
 * Adicionar motos: Funcionalidade responsável pelo cadastro de motos que entram no pátio. Ao registrar uma nova moto no sistema,
 *  um QR Code é gerado automaticamente contendo todas as informações da moto. Esse QR Code é impresso imediatamente por meio da integração com a impressora (Para a primeira Sprint,
    as motos e suas informações são armazenada apenas no AsyncStorage).
+
+## Como rodar o projeto
+
+Para rodar este projeto localmente, siga os passos abaixo:
+
+### Pré-requisitos
+
+Certifique-se de que você possui os seguintes itens instalados:
+
+- [Node.js](https://nodejs.org/) (versão LTS recomendada)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)  
+  Instale com:  
+  ```bash
+  npm install -g expo-cli
+
+- Um emulador Android/iOS ou o aplicativo Expo Go no seu celular.
+
+### Passos para executar o projeto
+#### 1. Clone o repositório e entre na pasta do projeto
+   ```bash
+   git clone https://github.com/Lugia-Code/mobile-app.git
+   cd mobile-app
+   ```
+
+#### 2. Instale as dependências:
+  ```bash
+   npm install
+   # ou
+   yarn install
+   ```
+
+#### 3. Inicie o servidor Expo: 
+   ```bash
+   npx expo
+   ```
+
+#### 4. Execute o app:
+
+No celular: Abra o aplicativo Expo Go e escaneie o QR Code.
+
+No emulador:
+
+Pressione a para abrir no Android.
+
+Pressione i para abrir no iOS (requer macOS).
