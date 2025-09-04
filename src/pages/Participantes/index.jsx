@@ -1,11 +1,13 @@
-import React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Integrantes from "../../_components/Integrantes";
+import ThemeToggleButton from "../../_components/ThemeToggleButton";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Participantes() {
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <Text style={styles.title}>Participantes</Text>
+      <ThemeToggleButton />
 
       <Integrantes
         nome="Nathan Magno"

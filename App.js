@@ -9,6 +9,7 @@ import Patio from "./src/pages/Patio/index";
 import Participantes from "./src/pages/Participantes/index";
 import Setor from "./src/pages/Setor/index";
 import InfoMoto from "./src/pages/InfoMoto/index";
+import { ThemeProvider } from "./src/context/ThemeContext";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -80,29 +81,31 @@ function Tabs() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Tabs"
-          component={Tabs}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Setor"
-          component={Setor}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InfoMoto"
-          component={InfoMoto}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Tabs"
+            component={Tabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Setor"
+            component={Setor}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoMoto"
+            component={InfoMoto}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
