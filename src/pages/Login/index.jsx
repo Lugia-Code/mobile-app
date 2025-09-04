@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   View,
   Text,
-  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import Btn from "../components/Btn";
+import Btn from "../../_components/Btn";
 
 export default function Login({ navigation }) {
   const [hidePassword, setHidePassword] = useState(true);
@@ -22,20 +21,11 @@ export default function Login({ navigation }) {
     setHidePassword(!hidePassword);
   };
 
-  const handleLogin = () => {
-    if (email === "funcionario@mottu.com" && password === "organiza") {
-      setError("");
-      navigation.navigate("Tabs");
-    } else {
-      setError("Email ou senha inválidos.");
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoContainer}>
         <Image
-          source={require("../../assets/lugiatrack.png")}
+          source={require("../../../assets/lugiatrack.png")}
           style={styles.logo}
           height={100}
         />
@@ -84,7 +74,7 @@ export default function Login({ navigation }) {
 
         {error !== "" && <Text style={styles.errorText}>{error}</Text>}
 
-        <Btn txt="Entrar" pressFunc={handleLogin} />
+        <Btn txt="Entrar" pressFunc={() => navigation.navigate("Tabs")} />
       </View>
     </SafeAreaView>
   );
@@ -144,7 +134,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   errorText: {
-    color: "#f87171", // vermelho claro
+    color: "#f87171",
     textAlign: "center",
     marginBottom: 20,
     fontSize: 14,

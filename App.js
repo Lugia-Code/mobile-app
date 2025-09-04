@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "./src/pages/Login";
-import ProcurarMoto from "./src/pages/ProcurarMoto";
+import Login from "./src/pages/Login/index";
+import ProcurarMoto from "./src/pages/ProcurarMoto/index";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
-import CadastrarMoto from "./src/pages/CadastrarMoto";
-import Patio from "./src/pages/Patio";
-import Participantes from "./src/pages/Participantes";
-import Setor from "./src/pages/Setor";
-import InfoMoto from "./src/pages/InfoMoto";
+import CadastrarMoto from "./src/pages/CadastrarMoto/index";
+import Patio from "./src/pages/Patio/index";
+import Participantes from "./src/pages/Participantes/index";
+import Setor from "./src/pages/Setor/index";
+import InfoMoto from "./src/pages/InfoMoto/index";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

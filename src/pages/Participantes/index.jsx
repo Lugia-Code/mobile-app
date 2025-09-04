@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
-import Integrantes from "../components/Integrantes";
+import Integrantes from "../../_components/Integrantes";
 
 export default function Participantes() {
   return (
@@ -10,22 +10,22 @@ export default function Participantes() {
       <Integrantes
         nome="Nathan Magno"
         rm="RM 558987"
-        urlImage={require("../../assets/Nathan.jpg")}
+        urlImage={require("../../../assets/Nathan.jpg")}
         github="https://github.com/NathanMagno"
       />
 
       <Integrantes
         nome="Júlio Cesar"
         rm="RM 557774"
-        urlImage={require("../../assets/Jubs.jpg")}
+        urlImage={require("../../../assets/Jubs.jpg")}
         github="https://github.com/JubsHereMan"
       />
 
       <Integrantes
-        nome="Erick Paschoalatto"
-        rm="RM 554854"
-        urlImage={require("../../assets/Erick.jpg")}
-        github="https://github.com/ozerikoz"
+        nome="Nathália Gomes"
+        rm="RM 554945"
+        urlImage={require("../../../assets/Nathalia.jpg")}
+        github="https://github.com/nathaliagmsss"
       />
     </ScrollView>
   );

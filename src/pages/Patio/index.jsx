@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Setores from "../components/Setores";
+import Setores from "../../_components/Setores";
 
 export default function Patio({ navigation }) {
   return (

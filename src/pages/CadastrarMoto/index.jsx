@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
-import Btn from "../components/Btn";
+import Btn from "../../_components/Btn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];

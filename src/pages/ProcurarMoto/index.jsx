@@ -8,7 +8,7 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import Btn from "../components/Btn";
+import Btn from "../../_components/Btn";
 
 export default function ProurarMoto({ navigation }) {
   const [chassi, setChassi] = useState("");
