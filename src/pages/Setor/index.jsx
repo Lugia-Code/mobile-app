@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRoute } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
+import { goBack } from "../../utils/navigation";
+import Cabecalho from "../../_components/Cabecalho";
 
 export default function Setor({ navigation }) {
   const route = useRoute();
@@ -34,38 +35,38 @@ export default function Setor({ navigation }) {
   }, [setor]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={28} color="#F97316" />
-        </TouchableOpacity>
-        <Text style={styles.titulo}>Motos do setor: {setor}</Text>
-      </View>
-
-      <FlatList
-        data={motos}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() => navigation.navigate("InfoMoto", { moto: item })}
-          >
-            <Text style={styles.texto}>
-              <Text style={styles.label}>Placa:</Text> {item.placa}
-            </Text>
-            <Text style={styles.texto}>
-              <Text style={styles.label}>Chassi:</Text> {item.chassi}
-            </Text>
-            <Text style={styles.texto}>
-              <Text style={styles.label}>Modelo:</Text> {item.modelo}
-            </Text>
-          </TouchableOpacity>
-        )}
-        ListEmptyComponent={
-          <Text style={styles.texto}>Nenhuma moto nesse setor.</Text>
-        }
+    <>
+      <Cabecalho
+        title={setor}
+        onIconPress={() => goBack(navigation)}
+        iconName="arrow-back"
       />
-    </View>
+      <View style={styles.container}>
+        <FlatList
+          data={motos}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.card}
+              onPress={() => navigation.navigate("InfoMoto", { moto: item })}
+            >
+              <Text style={styles.texto}>
+                <Text style={styles.label}>Placa:</Text> {item.placa}
+              </Text>
+              <Text style={styles.texto}>
+                <Text style={styles.label}>Chassi:</Text> {item.chassi}
+              </Text>
+              <Text style={styles.texto}>
+                <Text style={styles.label}>Modelo:</Text> {item.modelo}
+              </Text>
+            </TouchableOpacity>
+          )}
+          ListEmptyComponent={
+            <Text style={styles.texto}>Nenhuma moto nesse setor.</Text>
+          }
+        />
+      </View>
+    </>
   );
 }
 
@@ -75,11 +76,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#1a2639",
     padding: 20,
     paddingTop: "12%",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
   },
   titulo: {
     fontSize: 20,

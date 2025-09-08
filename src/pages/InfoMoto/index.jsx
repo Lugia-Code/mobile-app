@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome6, FontAwesome5 } from "@expo/vector-icons";
+import { goBack } from "../../utils/navigation";
+import Cabecalho from "../../_components/Cabecalho";
 
 export default function InfoMoto({ navigation }) {
   const route = useRoute();
@@ -29,48 +31,48 @@ export default function InfoMoto({ navigation }) {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={28} color="#F97316" />
-        </TouchableOpacity>
-        <Text style={styles.titulo}>Informações da Moto</Text>
-      </View>
+    <>
+      <Cabecalho
+        title="Informações da moto"
+        iconName="arrow-back"
+        onIconPress={() => goBack(navigation)}
+      />
+      <View style={styles.container}>
+        <View style={styles.infoBox}>
+          <View style={styles.infoRow}>
+            <Text style={styles.label}>Placa:</Text>
+            <Text style={styles.valor}>{moto.placa}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.label}>Modelo:</Text>
+            <Text style={styles.valor}>{moto.modelo}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.label}>Chassi:</Text>
+            <Text style={styles.valor}>{moto.chassi}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.label}>Setor:</Text>
+            <Text style={styles.valor}>{moto.setor}</Text>
+          </View>
+        </View>
 
-      <View style={styles.infoBox}>
-        <View style={styles.infoRow}>
-          <Text style={styles.label}>Placa:</Text>
-          <Text style={styles.valor}>{moto.placa}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.label}>Modelo:</Text>
-          <Text style={styles.valor}>{moto.modelo}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.label}>Chassi:</Text>
-          <Text style={styles.valor}>{moto.chassi}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.label}>Setor:</Text>
-          <Text style={styles.valor}>{moto.setor}</Text>
+        <View style={styles.containerLocation}>
+          <FontAwesome6
+            name="motorcycle"
+            color="#F97316"
+            size={50}
+            style={{ position: "absolute", ...motoPosition }}
+          />
+          <FontAwesome5
+            name="sort-up"
+            color="#F97316"
+            size={60}
+            style={{ position: "absolute", ...userPosition }}
+          />
         </View>
       </View>
-
-      <View style={styles.containerLocation}>
-        <FontAwesome6
-          name="motorcycle"
-          color="#F97316"
-          size={50}
-          style={{ position: "absolute", ...motoPosition }}
-        />
-        <FontAwesome5
-          name="sort-up"
-          color="#F97316"
-          size={60}
-          style={{ position: "absolute", ...userPosition }}
-        />
-      </View>
-    </View>
+    </>
   );
 }
 
@@ -81,11 +83,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: "12%",
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
+
   titulo: {
     fontSize: 20,
     fontWeight: "bold",

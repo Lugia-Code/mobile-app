@@ -1,14 +1,10 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, View, Text, TextInput, SafeAreaView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Btn from "../../_components/Btn";
+import Header from "../../_components/Cabecalho";
+import { logOut } from "../../utils/navigation";
+import Cabecalho from "../../_components/Cabecalho";
 
 export default function ProurarMoto({ navigation }) {
   const [chassi, setChassi] = useState("");
@@ -23,46 +19,53 @@ export default function ProurarMoto({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.scrollContainer}>
-        <View style={styles.searchContainer}>
-          <Text style={styles.sectionTitle}>Buscar moto</Text>
+    <>
+      <Cabecalho
+        title="Buscar Moto"
+        iconName="logout"
+        onIconPress={() => logOut(navigation)}
+      />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.scrollContainer}>
+          <View style={styles.searchContainer}>
+            <Text style={styles.sectionTitle}>Buscar moto</Text>
 
-          <View style={styles.inputContainer}>
-            <Ionicons
-              name="search"
-              size={20}
-              color="#888"
-              style={styles.searchIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Informe o chassi da moto"
-              placeholderTextColor="#888"
-              value={chassi}
-              onChangeText={setChassi}
-            />
+            <View style={styles.inputContainer}>
+              <Ionicons
+                name="search"
+                size={20}
+                color="#888"
+                style={styles.searchIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Informe o chassi da moto"
+                placeholderTextColor="#888"
+                value={chassi}
+                onChangeText={setChassi}
+              />
+            </View>
+            <Text style={styles.ouText}>ou</Text>
+            <View style={styles.inputContainer}>
+              <Ionicons
+                name="search"
+                size={20}
+                color="#888"
+                style={styles.searchIcon}
+              />
+              <TextInput
+                style={styles.input}
+                placeholder="Informe a placa da moto"
+                placeholderTextColor="#888"
+                value={chassi}
+                onChangeText={setPlaca}
+              />
+            </View>
+            <Btn txt="Buscar" />
           </View>
-          <Text style={styles.ouText}>ou</Text>
-          <View style={styles.inputContainer}>
-            <Ionicons
-              name="search"
-              size={20}
-              color="#888"
-              style={styles.searchIcon}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Informe a placa da moto"
-              placeholderTextColor="#888"
-              value={chassi}
-              onChangeText={setPlaca}
-            />
-          </View>
-          <Btn txt="Buscar" />
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </>
   );
 }
 

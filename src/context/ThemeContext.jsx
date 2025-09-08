@@ -18,16 +18,24 @@ export function ThemeProvider({ children }) {
 
   const themeColors = {
     light: {
-      background: "#fff",
-      text: "yellow",
-      button: "white",
-      buttonText: "#fff",
+      background: "#F4F7FA",
+      surface: "#C0C0C0",
+      text: "#222B32",
+      textSecondary: "#4A5468",
+      danger: "#DD3C2F",
+      primary: "#179A46",
+      secondary: "#39E96E",
+      border: "#DDE3E9",
     },
     dark: {
-      background: "#121212",
-      text: "#fff",
-      button: "yellow",
-      buttonText: "#111",
+      background: "#151C26",
+      surface: "#202938",
+      text: "#FFFFFF",
+      textSecondary: "#C4CBD5",
+      danger: "#F64A3A",
+      primary: "#30D158",
+      secondary: "#39E96E",
+      border: "#2D3748",
     },
   };
 

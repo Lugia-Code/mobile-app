@@ -14,6 +14,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Btn from "../../_components/Btn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Header from "../../_components/Cabecalho";
+import { logOut } from "../../utils/navigation";
+import Cabecalho from "../../_components/Cabecalho";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 
@@ -28,7 +31,7 @@ const setoresDisponiveis = [
   { nome: "Minha Mottu", icone: "person" },
 ];
 
-export default function CadastrarMoto() {
+export default function CadastrarMoto({ navigation }) {
   const [placa, setPlaca] = useState("");
   const [chassi, setChassi] = useState("");
   const [modeloSelecionado, setModeloSelecionado] = useState("");
@@ -73,100 +76,107 @@ export default function CadastrarMoto() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView keyboardShouldPersistTaps="handled">
-        <Text style={styles.label}>Placa</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Informe a placa"
-          placeholderTextColor="#666"
-          value={placa}
-          onChangeText={setPlaca}
-        />
-        <View style={styles.underline} />
+    <>
+      <Cabecalho
+        title="Cadastrar moto"
+        iconName="logout"
+        onIconPress={() => logOut(navigation)}
+      />
+      <SafeAreaView style={styles.container}>
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <Text style={styles.label}>Placa</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Informe a placa"
+            placeholderTextColor="#666"
+            value={placa}
+            onChangeText={setPlaca}
+          />
+          <View style={styles.underline} />
 
-        <Text style={styles.label}>Chassi</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Informe o chassi"
-          placeholderTextColor="#666"
-          value={chassi}
-          onChangeText={setChassi}
-        />
-        <View style={styles.underline} />
+          <Text style={styles.label}>Chassi</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Informe o chassi"
+            placeholderTextColor="#666"
+            value={chassi}
+            onChangeText={setChassi}
+          />
+          <View style={styles.underline} />
 
-        <Text style={styles.label}>Modelo da moto</Text>
-        <FlatList
-          scrollEnabled={false}
-          data={modelosDisponiveis}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.modeloItem,
-                modeloSelecionado === item && styles.modeloItemSelecionado,
-              ]}
-              onPress={() => setModeloSelecionado(item)}
-            >
-              <Text
-                style={[
-                  styles.modeloTexto,
-                  modeloSelecionado === item && styles.modeloTextoSelecionado,
-                ]}
-              >
-                {item}
-              </Text>
-            </TouchableOpacity>
-          )}
-        />
-
-        <Text style={[styles.label, { marginTop: 30 }]}>
-          Direcionar para setor
-        </Text>
-        <FlatList
-          scrollEnabled={false}
-          data={setoresDisponiveis}
-          keyExtractor={(item) => item.nome}
-          renderItem={({ item }) => {
-            const selecionado = setorSelecionado === item.nome;
-            return (
+          <Text style={styles.label}>Modelo da moto</Text>
+          <FlatList
+            scrollEnabled={false}
+            data={modelosDisponiveis}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => setSetorSelecionado(item.nome)}
                 style={[
-                  setorStyles.container,
-                  selecionado && setorStyles.containerSelecionado,
+                  styles.modeloItem,
+                  modeloSelecionado === item && styles.modeloItemSelecionado,
                 ]}
+                onPress={() => setModeloSelecionado(item)}
               >
                 <Text
                   style={[
-                    setorStyles.nome,
-                    selecionado && setorStyles.nomeSelecionado,
+                    styles.modeloTexto,
+                    modeloSelecionado === item && styles.modeloTextoSelecionado,
                   ]}
                 >
-                  {item.nome}
+                  {item}
                 </Text>
-                <Ionicons
-                  name={item.icone}
-                  size={30}
-                  color={selecionado ? "#22c55e" : "#d1d9e6"}
-                  marginHorizontal={30}
-                />
-                {selecionado && (
-                  <View
-                    style={[
-                      setorStyles.barraCor,
-                      { backgroundColor: "#22c55e" },
-                    ]}
-                  />
-                )}
               </TouchableOpacity>
-            );
-          }}
-        />
+            )}
+          />
 
-        <Btn txt="Cadastrar" pressFunc={cadastrarMoto} />
-      </ScrollView>
-    </SafeAreaView>
+          <Text style={[styles.label, { marginTop: 30 }]}>
+            Direcionar para setor
+          </Text>
+          <FlatList
+            scrollEnabled={false}
+            data={setoresDisponiveis}
+            keyExtractor={(item) => item.nome}
+            renderItem={({ item }) => {
+              const selecionado = setorSelecionado === item.nome;
+              return (
+                <TouchableOpacity
+                  onPress={() => setSetorSelecionado(item.nome)}
+                  style={[
+                    setorStyles.container,
+                    selecionado && setorStyles.containerSelecionado,
+                  ]}
+                >
+                  <Text
+                    style={[
+                      setorStyles.nome,
+                      selecionado && setorStyles.nomeSelecionado,
+                    ]}
+                  >
+                    {item.nome}
+                  </Text>
+                  <Ionicons
+                    name={item.icone}
+                    size={30}
+                    color={selecionado ? "#22c55e" : "#d1d9e6"}
+                    marginHorizontal={30}
+                  />
+                  {selecionado && (
+                    <View
+                      style={[
+                        setorStyles.barraCor,
+                        { backgroundColor: "#22c55e" },
+                      ]}
+                    />
+                  )}
+                </TouchableOpacity>
+              );
+            }}
+          />
+
+          <Btn txt="Cadastrar" pressFunc={cadastrarMoto} />
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
 
