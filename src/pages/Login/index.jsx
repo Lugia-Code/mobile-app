@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     width: "100%",
     height: 62,
-    marginTop: 30,
+    paddingTop: "22%",
     alignItems: "center",
   },
   logo: {
@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     justifyContent: "center",
-    paddingBottom: 100,
+    position: "relative",
+    marginBottom: "30%",
   },
   inputContainer: {
     marginBottom: 30,

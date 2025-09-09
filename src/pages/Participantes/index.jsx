@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Integrantes from "../../_components/Integrantes";
-import ThemeToggleButton from "../../_components/ThemeToggleButton";
 import { useTheme } from "../../context/ThemeContext";
 import Header from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 export default function Participantes() {
   return (
@@ -12,30 +12,30 @@ export default function Participantes() {
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <ThemeToggleButton />
+      <ContainerScreens>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <Integrantes
+            nome="Nathan Magno"
+            rm="RM 558987"
+            urlImage={require("../../../assets/Nathan.jpg")}
+            github="https://github.com/NathanMagno"
+          />
 
-        <Integrantes
-          nome="Nathan Magno"
-          rm="RM 558987"
-          urlImage={require("../../../assets/Nathan.jpg")}
-          github="https://github.com/NathanMagno"
-        />
+          <Integrantes
+            nome="Júlio Cesar"
+            rm="RM 557774"
+            urlImage={require("../../../assets/Jubs.jpg")}
+            github="https://github.com/JubsHereMan"
+          />
 
-        <Integrantes
-          nome="Júlio Cesar"
-          rm="RM 557774"
-          urlImage={require("../../../assets/Jubs.jpg")}
-          github="https://github.com/JubsHereMan"
-        />
-
-        <Integrantes
-          nome="Nathália Gomes"
-          rm="RM 554945"
-          urlImage={require("../../../assets/Nathalia.jpg")}
-          github="https://github.com/nathaliagmsss"
-        />
-      </ScrollView>
+          <Integrantes
+            nome="Nathália Gomes"
+            rm="RM 554945"
+            urlImage={require("../../../assets/Nathalia.jpg")}
+            github="https://github.com/nathaliagmsss"
+          />
+        </ScrollView>
+      </ContainerScreens>
     </>
   );
 }
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#1a2639",
+
     paddingBottom: 20,
   },
   title: {

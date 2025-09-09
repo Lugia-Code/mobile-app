@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRoute } from "@react-navigation/native";
 import { goBack } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 export default function Setor({ navigation }) {
   const route = useRoute();
@@ -41,7 +42,7 @@ export default function Setor({ navigation }) {
         onIconPress={() => goBack(navigation)}
         iconName="arrow-back"
       />
-      <View style={styles.container}>
+      <ContainerScreens>
         <FlatList
           data={motos}
           keyExtractor={(item, index) => index.toString()}
@@ -65,18 +66,12 @@ export default function Setor({ navigation }) {
             <Text style={styles.texto}>Nenhuma moto nesse setor.</Text>
           }
         />
-      </View>
+      </ContainerScreens>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1a2639",
-    padding: 20,
-    paddingTop: "12%",
-  },
   titulo: {
     fontSize: 20,
     fontWeight: "bold",

@@ -4,6 +4,7 @@ import Header from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import { useTheme } from "../../context/ThemeContext";
 import Cabecalho from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 export default function Patio({ navigation }) {
   const { colors } = useTheme();
@@ -15,7 +16,7 @@ export default function Patio({ navigation }) {
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <ContainerScreens>
         <Text style={styles.info}>Selecione o setor que deseja verificar</Text>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Setores
@@ -87,17 +88,12 @@ export default function Patio({ navigation }) {
             }
           />
         </ScrollView>
-      </View>
+      </ContainerScreens>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: "12%",
-    paddingBottom: "15%",
-  },
   sectionTitle: {
     color: "#fff",
     fontSize: 20,

@@ -17,6 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Header from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 
@@ -82,7 +83,7 @@ export default function CadastrarMoto({ navigation }) {
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
-      <SafeAreaView style={styles.container}>
+      <ContainerScreens>
         <ScrollView keyboardShouldPersistTaps="handled">
           <Text style={styles.label}>Placa</Text>
           <TextInput
@@ -175,17 +176,12 @@ export default function CadastrarMoto({ navigation }) {
 
           <Btn txt="Cadastrar" pressFunc={cadastrarMoto} />
         </ScrollView>
-      </SafeAreaView>
+      </ContainerScreens>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#0F1C2D",
-    padding: 20,
-  },
   label: {
     color: "#F97316",
     fontSize: 16,

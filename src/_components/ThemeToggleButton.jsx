@@ -12,8 +12,8 @@ export default function ThemeToggleButton() {
     >
       <Ionicons
         name={theme == "light" ? "sunny" : "moon"}
-        size={34}
-        color="#000"
+        size={32}
+        color={colors.primary}
       />
     </TouchableOpacity>
   );
@@ -21,16 +21,11 @@ export default function ThemeToggleButton() {
 
 const styles = StyleSheet.create({
   button: {
-    padding: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    width: 50,
-    height: 50,
-    borderRadius: 100,
-    marginTop: 20,
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: "bold",
+    justifyContent: "flex-start",
+    alignSelf: "flex-end",
+    marginBottom: "10%",
+    marginRight: "8%",
+    width: 30,
+    height: 30,
   },
 });

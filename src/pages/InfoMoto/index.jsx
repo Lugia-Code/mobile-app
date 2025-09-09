@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome6, FontAwesome5 } from "@expo/vector-icons";
 import { goBack } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 export default function InfoMoto({ navigation }) {
   const route = useRoute();
@@ -37,7 +37,7 @@ export default function InfoMoto({ navigation }) {
         iconName="arrow-back"
         onIconPress={() => goBack(navigation)}
       />
-      <View style={styles.container}>
+      <ContainerScreens>
         <View style={styles.infoBox}>
           <View style={styles.infoRow}>
             <Text style={styles.label}>Placa:</Text>
@@ -71,19 +71,12 @@ export default function InfoMoto({ navigation }) {
             style={{ position: "absolute", ...userPosition }}
           />
         </View>
-      </View>
+      </ContainerScreens>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1a2639",
-    padding: 20,
-    paddingTop: "12%",
-  },
-
   titulo: {
     fontSize: 20,
     fontWeight: "bold",

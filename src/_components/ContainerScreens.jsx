@@ -1,0 +1,26 @@
+import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "../context/ThemeContext";
+import ThemeToggleButton from "./ThemeToggleButton";
+
+export default function ContainerScreens({ children }) {
+  const { colors } = useTheme();
+
+  return (
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
+      <ThemeToggleButton />
+      {children}
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: "12%",
+  },
+});

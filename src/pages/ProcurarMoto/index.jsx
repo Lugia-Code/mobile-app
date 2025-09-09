@@ -5,6 +5,7 @@ import Btn from "../../_components/Btn";
 import Header from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
+import ContainerScreens from "../../_components/ContainerScreens";
 
 export default function ProurarMoto({ navigation }) {
   const [chassi, setChassi] = useState("");
@@ -25,62 +26,51 @@ export default function ProurarMoto({ navigation }) {
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.scrollContainer}>
-          <View style={styles.searchContainer}>
-            <Text style={styles.sectionTitle}>Buscar moto</Text>
+      <ContainerScreens>
+        <View style={styles.searchContainer}>
+          <Text style={styles.sectionTitle}>Buscar moto</Text>
 
-            <View style={styles.inputContainer}>
-              <Ionicons
-                name="search"
-                size={20}
-                color="#888"
-                style={styles.searchIcon}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Informe o chassi da moto"
-                placeholderTextColor="#888"
-                value={chassi}
-                onChangeText={setChassi}
-              />
-            </View>
-            <Text style={styles.ouText}>ou</Text>
-            <View style={styles.inputContainer}>
-              <Ionicons
-                name="search"
-                size={20}
-                color="#888"
-                style={styles.searchIcon}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Informe a placa da moto"
-                placeholderTextColor="#888"
-                value={chassi}
-                onChangeText={setPlaca}
-              />
-            </View>
-            <Btn txt="Buscar" />
+          <View style={styles.inputContainer}>
+            <Ionicons
+              name="search"
+              size={20}
+              color="#888"
+              style={styles.searchIcon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Informe o chassi da moto"
+              placeholderTextColor="#888"
+              value={chassi}
+              onChangeText={setChassi}
+            />
           </View>
+          <Text style={styles.ouText}>ou</Text>
+          <View style={styles.inputContainer}>
+            <Ionicons
+              name="search"
+              size={20}
+              color="#888"
+              style={styles.searchIcon}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Informe a placa da moto"
+              placeholderTextColor="#888"
+              value={chassi}
+              onChangeText={setPlaca}
+            />
+          </View>
+          <Btn txt="Buscar" />
         </View>
-      </SafeAreaView>
+      </ContainerScreens>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1a2639",
-    paddingTop: "12%",
-  },
-
-  scrollContainer: {
-    flex: 1,
-  },
   searchContainer: {
-    padding: 20,
+    padding: 22,
     alignItems: "center",
     flex: 1,
     display: "flex",
