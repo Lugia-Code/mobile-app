@@ -10,8 +10,11 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Btn from "../../_components/Btn";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Login({ navigation }) {
+  const { colors } = useTheme();
+
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,57 +25,65 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+    >
       <View style={styles.logoContainer}>
         <Image
           source={require("../../../assets/lugiatrack.png")}
           style={styles.logo}
           height={100}
         />
+        <Text style={[styles.trackingCode, { color: colors.secondary }]}>
+          Tracking Code
+        </Text>
       </View>
 
       <View style={styles.formContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Email</Text>
+        <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <TextInput
-            style={styles.input}
-            placeholderTextColor="#666"
-            textContentType="emailAddress"
+            style={[styles.input, { color: colors.textSecondary }]}
+            placeholder="Insira seu e-mail"
+            placeholderTextColor={colors.textSecondary}
             keyboardType="email-address"
+            textContentType="emailAddress"
             value={email}
             onChangeText={setEmail}
-            placeholder="Digite seu email"
+            autoCapitalize="none"
           />
-          <View style={styles.underline} />
         </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Senha</Text>
-          <View style={styles.passwordContainer}>
+        <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
+          <View style={styles.passwordRow}>
             <TextInput
-              style={styles.passwordInput}
+              style={[styles.input, { flex: 1, color: colors.textSecondary }]}
+              placeholder="Insira sua senha"
+              placeholderTextColor={colors.textSecondary}
               secureTextEntry={hidePassword}
-              textContentType="password"
-              placeholderTextColor="#666"
               value={password}
               onChangeText={setPassword}
-              placeholder="Digite sua senha"
+              autoCapitalize="none"
             />
             <TouchableOpacity
               onPress={togglePasswordVisibility}
-              style={styles.eyeIcon}
+              style={styles.eyeBtn}
             >
-              <Icon
-                name={hidePassword ? "eye-off" : "eye"}
-                size={24}
-                color="#F97316"
-              />
+              <View style={styles.eyeCircle}>
+                <Icon
+                  name={hidePassword ? "eye-off" : "eye"}
+                  size={22}
+                  color={colors.secondary}
+                />
+              </View>
             </TouchableOpacity>
           </View>
-          <View style={styles.underline} />
         </View>
 
-        {error !== "" && <Text style={styles.errorText}>{error}</Text>}
+        {error !== "" && (
+          <Text style={[styles.errorText, { color: colors.danger }]}>
+            {error}
+          </Text>
+        )}
 
         <Btn txt="Entrar" pressFunc={() => navigation.navigate("Tabs")} />
       </View>
@@ -83,59 +94,60 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0F1C2D",
     padding: 20,
+  },
+  trackingCode: {
+    fontSize: 40,
+    fontWeight: 600,
   },
   logoContainer: {
     width: "100%",
-    height: 62,
+    display: "flex",
+    flexDirection: "column",
+    height: "25%",
+    gap: "30%",
     paddingTop: "22%",
     alignItems: "center",
   },
   logo: {
     width: 85,
     height: 63,
-    paddingInline: 40,
   },
   formContainer: {
-    flex: 1,
+    flex: 0.75,
+    gap: "5%",
     justifyContent: "center",
-    position: "relative",
-    marginBottom: "30%",
   },
-  inputContainer: {
-    marginBottom: 30,
-  },
-  label: {
-    color: "#F97316",
-    fontSize: 16,
-    marginBottom: 5,
+  inputBox: {
+    borderRadius: 24,
+    paddingHorizontal: 18,
+    height: 56,
+    justifyContent: "center",
+    marginBottom: 24,
   },
   input: {
-    color: "white",
-    fontSize: 16,
-    paddingVertical: 8,
+    fontSize: 20,
+    textAlign: "center",
+    letterSpacing: 1,
   },
-  passwordContainer: {
+  passwordRow: {
     flexDirection: "row",
     alignItems: "center",
   },
-  passwordInput: {
-    flex: 1,
-    color: "white",
-    fontSize: 16,
-    paddingVertical: 8,
+  eyeBtn: {
+    marginLeft: 8,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  eyeIcon: {
-    padding: 4,
-  },
-  underline: {
-    height: 1,
-    backgroundColor: "#F97316",
-    marginTop: 5,
+  eyeCircle: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+
+    justifyContent: "center",
+    alignItems: "center",
   },
   errorText: {
-    color: "#f87171",
     textAlign: "center",
     marginBottom: 20,
     fontSize: 14,

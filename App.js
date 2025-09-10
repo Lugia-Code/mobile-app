@@ -18,14 +18,12 @@ function Tabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#000",
-        tabBarInactiveTintColor: "#444444",
+        tabBarActiveTintColor: "#2D3748",
+        tabBarInactiveTintColor: "#30D158",
         tabBarStyle: {
           height: 60,
-          paddingBottom: 1,
-          paddingHorizontal: 2,
+          paddingBottom: 0.1,
         },
-
         headerShown: false,
       }}
     >
@@ -34,9 +32,8 @@ function Tabs() {
         component={ProcurarMoto}
         options={{
           tabBarIcon: () => <Ionicons name="search" size={26} color="#000" />,
-          tabBarLabel: "Procurar Moto",
-          tabBarActiveBackgroundColor: "#10B981",
-          tabBarInactiveBackgroundColor: "#F97316",
+          tabBarActiveBackgroundColor: "#30D158",
+          tabBarInactiveBackgroundColor: "#2D3748",
         }}
       />
       <Tab.Screen
@@ -46,9 +43,8 @@ function Tabs() {
           tabBarIcon: () => (
             <MaterialCommunityIcons name="garage" size={33} color="#000" />
           ),
-          tabBarLabel: "Pátio",
-          tabBarActiveBackgroundColor: "#10B981",
-          tabBarInactiveBackgroundColor: "#F97316",
+          tabBarActiveBackgroundColor: "#30D158",
+          tabBarInactiveBackgroundColor: "#2D3748",
         }}
       />
       <Tab.Screen
@@ -58,9 +54,8 @@ function Tabs() {
           tabBarIcon: () => (
             <MaterialCommunityIcons name="plus" size={33} color="#000" />
           ),
-          tabBarLabel: "Adicionar moto",
-          tabBarActiveBackgroundColor: "#10B981",
-          tabBarInactiveBackgroundColor: "#F97316",
+          tabBarActiveBackgroundColor: "#30D158",
+          tabBarInactiveBackgroundColor: "#2D3748",
         }}
       />
       <Tab.Screen
@@ -70,9 +65,8 @@ function Tabs() {
           tabBarIcon: () => (
             <Ionicons name="people-sharp" size={28} color="#000" />
           ),
-          tabBarLabel: "Integrantes",
-          tabBarActiveBackgroundColor: "#10B981",
-          tabBarInactiveBackgroundColor: "#F97316",
+          tabBarActiveBackgroundColor: "#30D158",
+          tabBarInactiveBackgroundColor: "#2D3748",
         }}
       />
     </Tab.Navigator>

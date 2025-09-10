@@ -28,8 +28,6 @@ export default function ProurarMoto({ navigation }) {
       />
       <ContainerScreens>
         <View style={styles.searchContainer}>
-          <Text style={styles.sectionTitle}>Buscar moto</Text>
-
           <View style={styles.inputContainer}>
             <Ionicons
               name="search"
