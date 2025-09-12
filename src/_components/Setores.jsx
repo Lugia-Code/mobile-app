@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function Setores({ nome, icone, cor, onPressFunc }) {
+export default function Setores({ nome, icone, onPressFunc }) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPressFunc}>
       <Text style={styles.nome}>{nome}</Text>
@@ -12,7 +12,7 @@ export default function Setores({ nome, icone, cor, onPressFunc }) {
         color="#d1d9e6"
         style={{ marginHorizontal: 30 }}
       />
-      <View style={[styles.barraCor, { backgroundColor: cor }]} />
+      <View style={[styles.barraCor]} />
     </TouchableOpacity>
   );
 }

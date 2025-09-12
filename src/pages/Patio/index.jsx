@@ -22,7 +22,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Pronta para aluguel"
             icone="checkmark-circle"
-            cor="green"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Pronta para aluguel" })
             }
@@ -30,7 +29,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Pendente"
             icone="time-sharp"
-            cor="yellow"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Pendente" })
             }
@@ -38,7 +36,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Sem placa"
             icone="close-circle"
-            cor="white"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Sem placa" })
             }
@@ -46,7 +43,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Danos estruturais graves"
             icone="warning"
-            cor="red"
             onPressFunc={() =>
               navigation.navigate("Setor", {
                 setor: "Danos estruturais graves",
@@ -56,7 +52,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Reparo simples"
             icone="construct"
-            cor="blue"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Reparo simples" })
             }
@@ -64,7 +59,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Agendada para manutenção"
             icone="calendar"
-            cor="grey"
             onPressFunc={() =>
               navigation.navigate("Setor", {
                 setor: "Agendada para manutenção",
@@ -74,7 +68,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Motor defeituoso"
             icone="cog"
-            cor="orange"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Motor defeituoso" })
             }
@@ -82,7 +75,6 @@ export default function Patio({ navigation }) {
           <Setores
             nome="Minha Mottu"
             icone="person"
-            cor="#00C853"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Minha Mottu" })
             }
