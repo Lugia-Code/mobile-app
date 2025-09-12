@@ -1,16 +1,29 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Setores({ nome, icone, onPressFunc }) {
+  const { colors } = useTheme();
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPressFunc}>
-      <Text style={styles.nome}>{nome}</Text>
+    <TouchableOpacity
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.secondary,
+          shadowColor: colors.border,
+          borderColor: colors.border,
+        },
+      ]}
+      onPress={onPressFunc}
+    >
+      <Text style={[styles.nome, { color: colors.text }]}>{nome}</Text>
       <Ionicons
         name={icone}
         size={30}
         color="#d1d9e6"
-        style={{ marginHorizontal: 30 }}
+        style={{ marginHorizontal: 30, color: colors.text }}
       />
       <View style={[styles.barraCor]} />
     </TouchableOpacity>
@@ -19,7 +32,6 @@ export default function Setores({ nome, icone, onPressFunc }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1a2639",
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 20,
@@ -28,20 +40,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    shadowColor: "#ffffff",
+
     shadowOffset: { width: 10, height: 40 },
     shadowOpacity: 1,
     shadowRadius: 80,
     elevation: 4,
     borderWidth: 1,
-    borderColor: "#d1d9e6",
+
     position: "relative",
     marginVertical: "4%",
   },
   nome: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#d1d9e6",
+
     flex: 1,
   },
   barraCor: {

@@ -5,8 +5,10 @@ import { useRoute } from "@react-navigation/native";
 import { goBack } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function Setor({ navigation }) {
+  const { colors } = useTheme();
   const route = useRoute();
   const { setor } = route.params;
 
@@ -42,22 +44,33 @@ export default function Setor({ navigation }) {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={styles.card}
+              style={[styles.card, { backgroundColor: colors.secondary }]}
               onPress={() => navigation.navigate("InfoMoto", { moto: item })}
             >
-              <Text style={styles.texto}>
-                <Text style={styles.label}>Placa:</Text> {item.placa}
+              <Text style={[styles.texto, { color: colors.text }]}>
+                <Text style={[styles.label, { color: colors.border }]}>
+                  Placa:
+                </Text>{" "}
+                {item.placa}
               </Text>
-              <Text style={styles.texto}>
-                <Text style={styles.label}>Chassi:</Text> {item.chassi}
+              <Text style={[styles.texto, { color: colors.text }]}>
+                <Text style={[styles.label, { color: colors.border }]}>
+                  Chassi:
+                </Text>{" "}
+                {item.chassi}
               </Text>
-              <Text style={styles.texto}>
-                <Text style={styles.label}>Modelo:</Text> {item.modelo}
+              <Text style={[styles.texto, { color: colors.text }]}>
+                <Text style={[styles.label, { color: colors.border }]}>
+                  Modelo:
+                </Text>{" "}
+                {item.modelo}
               </Text>
             </TouchableOpacity>
           )}
           ListEmptyComponent={
-            <Text style={styles.texto}>Nenhuma moto nesse setor.</Text>
+            <Text style={[styles.texto, { color: colors.text }]}>
+              Nenhuma moto nesse setor.
+            </Text>
           }
         />
       </ContainerScreens>
@@ -66,25 +79,15 @@ export default function Setor({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  titulo: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
-    marginLeft: 12,
-    flexShrink: 1,
-  },
   card: {
-    backgroundColor: "#2a3550",
     padding: 16,
     marginBottom: 12,
     borderRadius: 12,
   },
   texto: {
-    color: "#d1d9e6",
     fontSize: 16,
   },
   label: {
-    color: "#F97316",
     fontWeight: "500",
   },
 });

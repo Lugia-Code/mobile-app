@@ -17,7 +17,9 @@ export default function Patio({ navigation }) {
         onIconPress={() => logOut(navigation)}
       />
       <ContainerScreens>
-        <Text style={styles.info}>Selecione o setor que deseja verificar</Text>
+        <Text style={[styles.info, { color: colors.text }]}>
+          Selecione o setor que deseja verificar
+        </Text>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Setores
             nome="Pronta para aluguel"
@@ -87,14 +89,12 @@ export default function Patio({ navigation }) {
 
 const styles = StyleSheet.create({
   sectionTitle: {
-    color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 15,
     alignSelf: "center",
   },
   info: {
-    color: "#fff",
     fontSize: 18,
     fontWeight: "400",
     marginVertical: 28,

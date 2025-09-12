@@ -1,34 +1,14 @@
-import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { FontAwesome6, FontAwesome5 } from "@expo/vector-icons";
+import { View, Text, StyleSheet } from "react-native";
 import { goBack } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function InfoMoto({ navigation }) {
+  const { colors } = useTheme();
   const route = useRoute();
   const { moto } = route.params;
-
-  const [motoPosition, setMotoPosition] = useState({ left: 0, top: 0 });
-  const [userPosition, setUserPosition] = useState({ left: 0, top: 0 });
-
-  useEffect(() => {
-    const maxLeft = 300;
-    const maxTop = 400;
-
-    const getRandom = (max) => Math.floor(Math.random() * max);
-
-    setMotoPosition({
-      left: getRandom(maxLeft),
-      top: getRandom(maxTop),
-    });
-
-    setUserPosition({
-      left: getRandom(maxLeft),
-      top: getRandom(maxTop),
-    });
-  }, []);
 
   return (
     <>
@@ -38,38 +18,27 @@ export default function InfoMoto({ navigation }) {
         onIconPress={() => goBack(navigation)}
       />
       <ContainerScreens>
-        <View style={styles.infoBox}>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Placa:</Text>
-            <Text style={styles.valor}>{moto.placa}</Text>
+        <View style={styles.content}>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.infoText, { color: colors.text }]}>
+              {moto.placa}
+            </Text>
           </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Modelo:</Text>
-            <Text style={styles.valor}>{moto.modelo}</Text>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.infoText, { color: colors.text }]}>
+              {moto.chassi}
+            </Text>
           </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Chassi:</Text>
-            <Text style={styles.valor}>{moto.chassi}</Text>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.infoText, { color: colors.text }]}>
+              {moto.modelo}
+            </Text>
           </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.label}>Setor:</Text>
-            <Text style={styles.valor}>{moto.setor}</Text>
+          <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
+            <Text style={[styles.infoText, { color: colors.text }]}>
+              {moto.setor}
+            </Text>
           </View>
-        </View>
-
-        <View style={styles.containerLocation}>
-          <FontAwesome6
-            name="motorcycle"
-            color="#F97316"
-            size={50}
-            style={{ position: "absolute", ...motoPosition }}
-          />
-          <FontAwesome5
-            name="sort-up"
-            color="#F97316"
-            size={60}
-            style={{ position: "absolute", ...userPosition }}
-          />
         </View>
       </ContainerScreens>
     </>
@@ -77,40 +46,23 @@ export default function InfoMoto({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  titulo: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#fff",
-    marginLeft: 12,
-    flex: 1,
-    textAlign: "center",
+  content: {
+    marginTop: "5%",
+    width: "100%",
+    alignItems: "center",
+    paddingHorizontal: "5%",
+    gap: "7%",
   },
   infoBox: {
-    backgroundColor: "#2a3550",
-    padding: 20,
-    borderRadius: 12,
+    width: "88%",
+    borderRadius: 16,
+    paddingVertical: 13,
+    alignItems: "center",
+    marginBottom: 0,
   },
-  containerLocation: {
-    backgroundColor: "#2a3550",
-    height: 500,
-    width: 360,
-    alignSelf: "center",
-    marginTop: 50,
-    position: "relative",
-    borderRadius: 12,
-  },
-  infoRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 12,
-  },
-  label: {
-    color: "#F97316",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  valor: {
-    color: "#fff",
-    fontSize: 16,
+  infoText: {
+    fontSize: 18,
+    fontWeight: "400",
+    letterSpacing: 0.2,
   },
 });

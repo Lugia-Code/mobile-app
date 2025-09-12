@@ -6,8 +6,10 @@ import Header from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function ProurarMoto({ navigation }) {
+  const { colors } = useTheme();
   const [chassi, setChassi] = useState("");
   const [placa, setPlaca] = useState("");
 
@@ -28,34 +30,38 @@ export default function ProurarMoto({ navigation }) {
       />
       <ContainerScreens>
         <View style={styles.searchContainer}>
-          <View style={styles.inputContainer}>
+          <View
+            style={[styles.inputContainer, { backgroundColor: colors.surface }]}
+          >
             <Ionicons
               name="search"
               size={20}
-              color="#888"
+              color={colors.text}
               style={styles.searchIcon}
             />
             <TextInput
-              style={styles.input}
+              style={{ color: colors.textSecondary }}
               placeholder="Informe o chassi da moto"
-              placeholderTextColor="#888"
+              placeholderTextColor={colors.textSecondary}
               value={chassi}
               onChangeText={setChassi}
             />
           </View>
-          <Text style={styles.ouText}>ou</Text>
-          <View style={styles.inputContainer}>
+          <Text style={[styles.ouText, { color: colors.text }]}>ou</Text>
+          <View
+            style={[styles.inputContainer, { backgroundColor: colors.surface }]}
+          >
             <Ionicons
               name="search"
               size={20}
-              color="#888"
+              color={colors.text}
               style={styles.searchIcon}
             />
             <TextInput
-              style={styles.input}
+              style={{ color: colors.textSecondary }}
               placeholder="Informe a placa da moto"
-              placeholderTextColor="#888"
-              value={chassi}
+              placeholderTextColor={colors.textSecondary}
+              value={placa}
               onChangeText={setPlaca}
             />
           </View>
@@ -75,31 +81,24 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 30,
   },
-  sectionTitle: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 15,
-    alignSelf: "center",
-  },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#fff",
-    borderRadius: 5,
+    borderRadius: 16,
+    paddingVertical: 13,
+    paddingHorizontal: 20,
+    marginBottom: 10,
+    borderWidth: 1.5,
     width: "100%",
   },
   searchIcon: {
     marginHorizontal: 10,
   },
   input: {
-    flex: 1,
-    height: 45,
-    padding: 10,
-    color: "#333",
+    fontSize: 22,
+    fontWeight: "500",
   },
   ouText: {
-    color: "#fff",
     fontSize: 18,
     fontWeight: "700",
   },

@@ -14,6 +14,8 @@ import Btn from "../../_components/Btn";
 import Cabecalho from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { useTheme } from "../../context/ThemeContext";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 
@@ -29,7 +31,8 @@ const setoresDisponiveis = [
 ];
 
 export default function CadastrarMoto({ navigation }) {
-  const [temPlaca, setTemPlaca] = useState(true);
+  const { colors } = useTheme();
+  const [temPlaca, setTemPlaca] = useState(false);
   const [placa, setPlaca] = useState("");
   const [chassi, setChassi] = useState("");
   const [modeloSelecionado, setModeloSelecionado] = useState("");
@@ -47,8 +50,6 @@ export default function CadastrarMoto({ navigation }) {
       Alert.alert("Erro", "Preencha todos os campos!");
       return;
     }
-
-    // ... (lógica de salvar permanece igual)
   };
 
   return (
@@ -66,24 +67,40 @@ export default function CadastrarMoto({ navigation }) {
           <View style={styles.checkboxRow}>
             <Pressable
               onPress={() => setTemPlaca(!temPlaca)}
-              style={styles.checkboxBase}
+              style={[
+                styles.checkboxBase,
+                {
+                  borderColor: colors.secondary,
+                  backgroundColor: colors.surface,
+                },
+              ]}
             >
               {temPlaca && (
-                <View style={styles.checkboxChecked}>
+                <View
+                  style={[
+                    styles.checkboxChecked,
+                    { backgroundColor: colors.secondary },
+                  ]}
+                >
                   <Ionicons name="checkmark" size={18} color="#fff" />
                 </View>
               )}
             </Pressable>
-            <Text style={styles.checkboxLabel}>Essa moto tem placa?</Text>
+            <Text style={[styles.checkboxLabel, { color: colors.text }]}>
+              Essa moto tem placa?
+            </Text>
           </View>
 
           {temPlaca && (
             <>
-              <Text style={styles.label}>Placa</Text>
+              <Text style={[styles.label, { color: colors.text }]}>Placa</Text>
               <TextInput
-                style={styles.input}
+                style={[
+                  styles.input,
+                  { backgroundColor: colors.surface, color: colors.text },
+                ]}
                 placeholder="Informe a placa"
-                placeholderTextColor="#888"
+                placeholderTextColor={colors.textSecondary}
                 value={placa}
                 onChangeText={setPlaca}
                 autoCapitalize="characters"
@@ -92,29 +109,38 @@ export default function CadastrarMoto({ navigation }) {
             </>
           )}
 
-          <Text style={styles.label}>Chassi</Text>
+          <Text style={[styles.label, { color: colors.text }]}>Chassi</Text>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              { backgroundColor: colors.surface, color: colors.text },
+            ]}
             placeholder="Informe o chassi"
-            placeholderTextColor="#888"
+            placeholderTextColor={colors.textSecondary}
             value={chassi}
             onChangeText={setChassi}
           />
 
-          <Text style={styles.label}>Modelo da moto</Text>
+          <Text style={[styles.label, { color: colors.text }]}>
+            Modelo da moto
+          </Text>
           {modelosDisponiveis.map((item) => (
             <TouchableOpacity
               key={item}
               style={[
                 styles.modeloBtn,
-                modeloSelecionado === item && styles.modeloBtnAtivo,
+                {
+                  backgroundColor: colors.border,
+                  borderColor: colors.textSecondary,
+                },
+                modeloSelecionado === item && { borderColor: colors.primary },
               ]}
               onPress={() => setModeloSelecionado(item)}
             >
               <Text
                 style={[
-                  styles.modeloTexto,
-                  modeloSelecionado === item && styles.modeloTextoAtivo,
+                  [styles.modeloTexto, { color: colors.text }],
+                  modeloSelecionado === item && { color: colors.primary },
                 ]}
               >
                 {item}
@@ -122,7 +148,9 @@ export default function CadastrarMoto({ navigation }) {
             </TouchableOpacity>
           ))}
 
-          <Text style={[styles.label, { marginTop: 22 }]}>
+          <Text
+            style={[[styles.label, { color: colors.text }], { marginTop: 22 }]}
+          >
             Direcionar para setor
           </Text>
           {setoresDisponiveis.map((item) => {
@@ -133,13 +161,15 @@ export default function CadastrarMoto({ navigation }) {
                 onPress={() => setSetorSelecionado(item.nome)}
                 style={[
                   setorStyles.container,
-                  selecionado && setorStyles.containerSelecionado,
+                  { backgroundColor: colors.border },
+                  selecionado && { borderColor: colors.primary },
                 ]}
               >
                 <Text
                   style={[
                     setorStyles.nome,
-                    selecionado && setorStyles.nomeSelecionado,
+                    { color: colors.text },
+                    selecionado && { color: colors.primary },
                   ]}
                 >
                   {item.nome}
@@ -147,7 +177,7 @@ export default function CadastrarMoto({ navigation }) {
                 <Ionicons
                   name={item.icone}
                   size={30}
-                  color={selecionado ? "#22c55e" : "#d1d9e6"}
+                  color={selecionado ? colors.primary : colors.text}
                   style={{ marginLeft: 20 }}
                 />
                 {selecionado && (
@@ -162,11 +192,14 @@ export default function CadastrarMoto({ navigation }) {
             );
           })}
 
-          <Text style={styles.label}>Tag</Text>
+          <Text style={[styles.label, { color: colors.text }]}>Tag</Text>
           <TextInput
-            style={styles.input}
+            style={[
+              styles.input,
+              { backgroundColor: colors.surface, color: colors.text },
+            ]}
             placeholder="Insira o código da tag"
-            placeholderTextColor="#888"
+            placeholderTextColor={colors.textSecondary}
             value={tag}
             onChangeText={setTag}
             autoCapitalize="characters"
@@ -181,7 +214,6 @@ export default function CadastrarMoto({ navigation }) {
 
 const styles = StyleSheet.create({
   label: {
-    color: "#d1d9e6",
     fontSize: 16,
     marginBottom: 6,
     marginTop: 18,
@@ -200,8 +232,6 @@ const styles = StyleSheet.create({
     height: 26,
     borderRadius: 13,
     borderWidth: 2,
-    borderColor: "#22c55e",
-    backgroundColor: "#222b37",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 10,
@@ -209,76 +239,57 @@ const styles = StyleSheet.create({
   checkboxChecked: {
     width: 22,
     height: 22,
-    borderRadius: 11,
-    backgroundColor: "#22c55e",
+    borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
   },
   checkboxLabel: {
-    color: "#fff",
     fontSize: 16,
     fontWeight: "600",
   },
   input: {
-    backgroundColor: "#19202C",
-    color: "#fff",
     fontSize: 17,
     borderRadius: 16,
     paddingVertical: 13,
     paddingHorizontal: 20,
     marginBottom: 10,
     borderWidth: 1.5,
-    borderColor: "#222b37",
+
     fontWeight: "500",
   },
   modeloBtn: {
-    backgroundColor: "#1a2639",
     borderRadius: 16,
     paddingVertical: 14,
     paddingHorizontal: 18,
     marginVertical: 6,
     borderWidth: 1,
-    borderColor: "#d1d9e6",
   },
-  modeloBtnAtivo: {
-    borderColor: "#22c55e",
-  },
+
   modeloTexto: {
-    color: "#d1d9e6",
     fontSize: 18,
     fontWeight: "600",
-  },
-  modeloTextoAtivo: {
-    color: "#22c55e",
   },
 });
 
 const setorStyles = StyleSheet.create({
   container: {
-    backgroundColor: "#1a2639",
     borderRadius: 16,
     paddingVertical: 16,
-    paddingHorizontal: 20,
+    paddingHorizontal: "8%",
     marginVertical: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: "#d1d9e6",
     position: "relative",
   },
-  containerSelecionado: {
-    borderColor: "#22c55e",
-  },
+
   nome: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#d1d9e6",
     flex: 1,
   },
-  nomeSelecionado: {
-    color: "#22c55e",
-  },
+
   barraCor: {
     position: "absolute",
     top: 0,
