@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   View,
   Text,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Btn from "../../_components/Btn";
 import { useTheme } from "../../context/ThemeContext";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebaseConfig";
 
 export default function Login({ navigation }) {
   const { colors } = useTheme();
@@ -22,6 +25,29 @@ export default function Login({ navigation }) {
 
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
+  };
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      Alert.alert("Atenção", "Preencha todos os campos!");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(async () => {
+        Alert.alert("Sucesso ao logar", `Usuário logado com sucesso!`);
+        navigation.replace("Tabs");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        let message = "";
+        if (errorCode === "auth/invalid-credential") {
+          message = "E-mail ou senha incorretos! Tente novamente";
+        } else {
+          message = "Erro ao fazer login. Tente novamente mais tarde.";
+        }
+        setError(message);
+      });
   };
 
   return (
@@ -42,7 +68,7 @@ export default function Login({ navigation }) {
       <View style={styles.formContainer}>
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <TextInput
-            style={[styles.input, { color: colors.textSecondary }]}
+            style={[styles.input, { color: colors.text }]}
             placeholder="Insira seu e-mail"
             placeholderTextColor={colors.textSecondary}
             keyboardType="email-address"
@@ -56,7 +82,7 @@ export default function Login({ navigation }) {
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <View style={styles.passwordRow}>
             <TextInput
-              style={[styles.input, { flex: 1, color: colors.textSecondary }]}
+              style={[styles.input, { flex: 1, color: colors.text }]}
               placeholder="Insira sua senha"
               placeholderTextColor={colors.textSecondary}
               secureTextEntry={hidePassword}
@@ -79,13 +105,13 @@ export default function Login({ navigation }) {
           </View>
         </View>
 
-        {error !== "" && (
+        <View style={{ minHeight: 22, justifyContent: "center" }}>
           <Text style={[styles.errorText, { color: colors.danger }]}>
-            {error}
+            {error !== "" ? error : " "}
           </Text>
-        )}
+        </View>
 
-        <Btn txt="Entrar" pressFunc={() => navigation.navigate("Tabs")} />
+        <Btn txt="Entrar" pressFunc={() => handleLogin()} />
       </View>
     </SafeAreaView>
   );
