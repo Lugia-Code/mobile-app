@@ -17,8 +17,8 @@ Essa abordagem também permite que o sistema seja aplicado em diferentes pátios
 * **Cadastro**: Foram utilizados dados mockados para email e senha do funcionário Mottu.
 
 ~~~
-Email: funcionario@mottu.com
-Senha: organiza
+Email: julio@gmail.com
+Senha: mottu123
 ~~~
 
 * **Funcionalidades do sistema**: O usuário pode navagar entre todas as funcionalidades do sistemas através
