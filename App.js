@@ -9,6 +9,7 @@ import Patio from "./src/pages/Patio/index";
 import Participantes from "./src/pages/Participantes/index";
 import Setor from "./src/pages/Setor/index";
 import InfoMoto from "./src/pages/InfoMoto/index";
+import CriarConta from "./src/pages/CriarConta/index";
 import { ThemeProvider } from "./src/context/ThemeContext";
 
 const Stack = createStackNavigator();
@@ -81,6 +82,11 @@ export default function App() {
           <Stack.Screen
             name="Login"
             component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CriarConta"
+            component={CriarConta}
             options={{ headerShown: false }}
           />
           <Stack.Screen

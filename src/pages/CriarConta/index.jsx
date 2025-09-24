@@ -1,53 +1,58 @@
-import { Image } from "expo-image";
-import { useState } from "react";
 import {
-  SafeAreaView,
+  Alert,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
-  Text,
-  Alert,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "../../context/ThemeContext";
+import { useState } from "react";
 import Icon from "react-native-vector-icons/Ionicons";
 import Btn from "../../_components/Btn";
-import { useTheme } from "../../context/ThemeContext";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
-import { logIn, Stack } from "../../utils/navigation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { logIn } from "../../utils/navigation";
 
-export default function Login({ navigation }) {
+export default function CriarConta({ navigation }) {
   const { colors } = useTheme();
-
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
 
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
   };
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert("Atenção", "Preencha todos os campos!");
-      return;
+  const validateForm = () => {
+    const newErrors = {};
+    if (!email) {
+      newErrors.email = "O e-mail é obrigatório.";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = "Digite um e-mail válido.";
     }
+    if (!password) {
+      newErrors.password = "A senha é obrigatória.";
+    } else if (password.length < 6) {
+      newErrors.password = "A senha deve ter pelo menos 6 caracteres.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    signInWithEmailAndPassword(auth, email, password)
+  const createAccount = () => {
+    validateForm();
+
+    createUserWithEmailAndPassword(auth, email, password)
       .then(async () => {
-        Alert.alert("Sucesso ao logar", `Usuário logado com sucesso!`);
         logIn(navigation);
+        Alert.alert("Contra criada com Sucesso!");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        let message = "";
-        if (errorCode === "auth/invalid-credential") {
-          message = "E-mail ou senha incorretos! Tente novamente";
-        } else {
-          message = "Erro ao fazer login. Tente novamente mais tarde.";
-        }
-        setError(message);
+        const errorMessage = error.message;
+        console.log12("Error:", errorMessage);
       });
   };
 
@@ -55,17 +60,6 @@ export default function Login({ navigation }) {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <View style={styles.logoContainer}>
-        <Image
-          source={require("../../../assets/lugiatrack.png")}
-          style={styles.logo}
-          height={100}
-        />
-        <Text style={[styles.trackingCode, { color: colors.secondary }]}>
-          Tracking Code
-        </Text>
-      </View>
-
       <View style={styles.formContainer}>
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <TextInput
@@ -78,13 +72,16 @@ export default function Login({ navigation }) {
             onChangeText={setEmail}
             autoCapitalize="none"
           />
+          {!!errors.email && (
+            <Text style={styles.errorMsg}>{errors.email}</Text>
+          )}
         </View>
 
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <View style={styles.passwordRow}>
             <TextInput
               style={[styles.input, { flex: 1, color: colors.text }]}
-              placeholder="Insira sua senha"
+              placeholder="Crie uma senha"
               placeholderTextColor={colors.textSecondary}
               secureTextEntry={hidePassword}
               value={password}
@@ -104,28 +101,12 @@ export default function Login({ navigation }) {
               </View>
             </TouchableOpacity>
           </View>
+          {!!errors.password && (
+            <Text style={styles.errorMsg}>{errors.password}</Text>
+          )}
         </View>
 
-        <View style={{ minHeight: 22, justifyContent: "center" }}>
-          <Text style={[styles.errorText, { color: colors.danger }]}>
-            {error !== "" ? error : " "}
-          </Text>
-        </View>
-
-        <Btn txt="Entrar" pressFunc={() => handleLogin()} />
-        <Text
-          onPress={() => Stack(navigation)}
-          style={{
-            color: colors.primary,
-            fontSize: 18,
-            fontWeight: 500,
-            alignSelf: "center",
-            position: "absolute",
-            bottom: 0,
-          }}
-        >
-          Criar Conta
-        </Text>
+        <Btn txt="Criar Conta" pressFunc={createAccount} />
       </View>
     </SafeAreaView>
   );
@@ -136,23 +117,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  trackingCode: {
-    fontSize: 40,
-    fontWeight: 600,
-  },
-  logoContainer: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    height: "25%",
-    gap: "30%",
-    paddingTop: "22%",
-    alignItems: "center",
-  },
-  logo: {
-    width: 85,
-    height: 63,
-  },
   formContainer: {
     flex: 0.75,
     gap: "5%",
@@ -161,9 +125,19 @@ const styles = StyleSheet.create({
   inputBox: {
     borderRadius: 24,
     paddingHorizontal: 18,
-    height: 56,
+    height: 50,
     justifyContent: "center",
-    marginBottom: 24,
+    marginBottom: 12,
+  },
+  errorMsg: {
+    color: "red",
+    marginTop: 8,
+    marginBottom: 4,
+    fontSize: 15,
+    textAlign: "center",
+    position: "absolute",
+    alignSelf: "center",
+    marginTop: 90,
   },
   input: {
     fontSize: 20,
@@ -183,13 +157,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-
     justifyContent: "center",
     alignItems: "center",
-  },
-  errorText: {
-    textAlign: "center",
-    marginBottom: 20,
-    fontSize: 14,
   },
 });

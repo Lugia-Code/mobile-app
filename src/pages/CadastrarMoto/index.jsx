@@ -87,7 +87,7 @@ export default function CadastrarMoto({ navigation }) {
               )}
             </Pressable>
             <Text style={[styles.checkboxLabel, { color: colors.text }]}>
-              Essa moto tem placa?
+              Tem placa?
             </Text>
           </View>
 

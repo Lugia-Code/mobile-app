@@ -10,3 +10,11 @@ export function logOut(navigation) {
     routes: [{ name: "Login" }],
   });
 }
+
+export function logIn(navigation) {
+  navigation.replace("Tabs");
+}
+
+export function Stack(navigation) {
+  navigation.push("CriarConta");
+}
