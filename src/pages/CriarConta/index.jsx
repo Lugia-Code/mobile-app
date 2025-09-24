@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Alert,
   StyleSheet,
   Text,
@@ -21,6 +22,7 @@ export default function CriarConta({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
@@ -45,15 +47,18 @@ export default function CriarConta({ navigation }) {
   const createAccount = () => {
     validateForm();
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async () => {
-        logIn(navigation);
-        Alert.alert("Contra criada com Sucesso!");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log12("Error:", errorMessage);
-      });
+    if (validateForm()) {
+      setLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async () => {
+          logIn(navigation);
+          Alert.alert("Contra criada com Sucesso!");
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          console.log("Error:", errorMessage);
+        });
+    }
   };
 
   return (
@@ -106,7 +111,24 @@ export default function CriarConta({ navigation }) {
           )}
         </View>
 
-        <Btn txt="Criar Conta" pressFunc={createAccount} />
+        <View
+          style={{
+            height: 56,
+            justifyContent: "center",
+            paddingHorizontal: 30,
+            marginBottom: 24,
+          }}
+        >
+          {loading ? (
+            <ActivityIndicator
+              style={loading}
+              size="large"
+              color={colors.secondary}
+            />
+          ) : (
+            <Btn txt="Criar Conta" pressFunc={createAccount} />
+          )}
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -159,5 +181,9 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
+  },
+  loading: {
+    marginTop: 16,
+    marginBottom: 16,
   },
 });

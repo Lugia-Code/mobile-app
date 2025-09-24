@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TextInput,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Btn from "../../_components/Btn";
 import Header from "../../_components/Cabecalho";
@@ -12,6 +19,7 @@ export default function ProurarMoto({ navigation }) {
   const { colors } = useTheme();
   const [chassi, setChassi] = useState("");
   const [placa, setPlaca] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleFindChassi = () => {
     console.log("Buscando moto com chassi:", chassi);
@@ -65,7 +73,25 @@ export default function ProurarMoto({ navigation }) {
               onChangeText={setPlaca}
             />
           </View>
-          <Btn txt="Buscar" />
+
+          <View
+            style={{
+              height: 56,
+              justifyContent: "center",
+              paddingHorizontal: 30,
+              marginBottom: 24,
+            }}
+          >
+            {loading ? (
+              <ActivityIndicator
+                style={loading}
+                size="large"
+                color={colors.secondary}
+              />
+            ) : (
+              <Btn txt="Procurar" pressFunc={() => null} />
+            )}
+          </View>
         </View>
       </ContainerScreens>
     </>

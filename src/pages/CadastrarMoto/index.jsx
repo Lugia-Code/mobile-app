@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Btn from "../../_components/Btn";
@@ -38,6 +39,7 @@ export default function CadastrarMoto({ navigation }) {
   const [modeloSelecionado, setModeloSelecionado] = useState("");
   const [setorSelecionado, setSetorSelecionado] = useState("");
   const [tag, setTag] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const cadastrarMoto = async () => {
     if (
@@ -205,7 +207,24 @@ export default function CadastrarMoto({ navigation }) {
             autoCapitalize="characters"
           />
 
-          <Btn txt="Cadastrar" pressFunc={cadastrarMoto} />
+          <View
+            style={{
+              height: 56,
+              justifyContent: "center",
+              paddingHorizontal: 30,
+              marginBottom: 24,
+            }}
+          >
+            {loading ? (
+              <ActivityIndicator
+                style={loading}
+                size="large"
+                color={colors.secondary}
+              />
+            ) : (
+              <Btn txt="Cadastrar" pressFunc={() => cadastrarMoto()} />
+            )}
+          </View>
         </ScrollView>
       </ContainerScreens>
     </>

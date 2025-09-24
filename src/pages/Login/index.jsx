@@ -8,6 +8,7 @@ import {
   View,
   Text,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Btn from "../../_components/Btn";
@@ -23,14 +24,18 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
   };
 
   const handleLogin = () => {
+    setLoading(true);
+
     if (!email || !password) {
       Alert.alert("Atenção", "Preencha todos os campos!");
+      setLoading(false);
       return;
     }
 
@@ -40,6 +45,7 @@ export default function Login({ navigation }) {
         logIn(navigation);
       })
       .catch((error) => {
+        setLoading(false);
         const errorCode = error.code;
         let message = "";
         if (errorCode === "auth/invalid-credential") {
@@ -112,7 +118,21 @@ export default function Login({ navigation }) {
           </Text>
         </View>
 
-        <Btn txt="Entrar" pressFunc={() => handleLogin()} />
+        <View
+          style={{
+            height: 56,
+            justifyContent: "center",
+            paddingHorizontal: 30,
+            marginBottom: 24,
+          }}
+        >
+          {loading ? (
+            <ActivityIndicator color={colors.secondary} size="large" />
+          ) : (
+            <Btn txt="Entrar" pressFunc={handleLogin} />
+          )}
+        </View>
+
         <Text
           onPress={() => Stack(navigation)}
           style={{
@@ -191,5 +211,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
     fontSize: 14,
+  },
+  loading: {
+    paddingBottom: 16,
   },
 });
