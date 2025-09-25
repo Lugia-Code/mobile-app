@@ -37,7 +37,7 @@ const members = [
   },
 ];
 
-export default function Participantes() {
+export default function Participantes({ navigation }) {
   const { colors } = useTheme();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const member = members[selectedIndex];
@@ -51,7 +51,7 @@ export default function Participantes() {
       <Cabecalho
         title="Integrantes"
         iconName="logout"
-        onIconPress={() => logOut()}
+        onIconPress={() => logOut(navigation)}
       />
       <ContainerScreens>
         <View style={styles.buttonGroup}>

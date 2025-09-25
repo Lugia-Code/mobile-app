@@ -1,6 +1,5 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import Setores from "../../_components/Setores";
-import Header from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import { useTheme } from "../../context/ThemeContext";
 import Cabecalho from "../../_components/Cabecalho";
