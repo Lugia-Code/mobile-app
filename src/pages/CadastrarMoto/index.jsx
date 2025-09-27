@@ -15,8 +15,8 @@ import Btn from "../../_components/Btn";
 import Cabecalho from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import { useTheme } from "../../context/ThemeContext";
+import axios from "axios";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 
@@ -42,16 +42,18 @@ export default function CadastrarMoto({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   const cadastrarMoto = async () => {
-    if (
-      (temPlaca && !placa.trim()) ||
-      !chassi.trim() ||
-      !modeloSelecionado ||
-      !setorSelecionado ||
-      !tag.trim()
-    ) {
-      Alert.alert("Erro", "Preencha todos os campos!");
-      return;
-    }
+    await axios
+      .post("http://192.168.15.3:5117/api/v1/motos", {
+        placa: placa,
+        chassi: chassi,
+        modelo: modeloSelecionado,
+        idSetor: 1,
+        codigoTag: tag,
+      })
+      .then((response, a) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log("erro:", error));
   };
 
   return (
@@ -106,7 +108,7 @@ export default function CadastrarMoto({ navigation }) {
                 value={placa}
                 onChangeText={setPlaca}
                 autoCapitalize="characters"
-                maxLength={8}
+                maxLength={7}
               />
             </>
           )}
