@@ -41,13 +41,37 @@ export default function CadastrarMoto({ navigation }) {
   const [tag, setTag] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const mapSetorParaId = (nomeSetor) => {
+    switch (nomeSetor) {
+      case "Pronta para aluguel":
+        return 1;
+      case "Minha Mottu":
+        return 2;
+      case "Pendente":
+        return 3;
+      case "Sem placa":
+        return 4;
+      case "Reparo simples":
+        return 5;
+      case "Danos estruturais graves":
+        return 6;
+      case "Motor defeituoso":
+        return 7;
+      case "Agendada para manutenção":
+        return 8;
+    }
+  };
+
   const cadastrarMoto = async () => {
+    const idSetor = mapSetorParaId(setorSelecionado);
+
+    console.log(idSetor);
     await axios
       .post("http://192.168.15.3:5117/api/v1/motos", {
         placa: placa,
         chassi: chassi,
         modelo: modeloSelecionado,
-        idSetor: 1,
+        idSetor: setorSelecionado,
         codigoTag: tag,
       })
       .then((response, a) => {
