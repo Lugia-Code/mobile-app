@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -40,6 +40,24 @@ export default function CadastrarMoto({ navigation }) {
   const [setorSelecionado, setSetorSelecionado] = useState("");
   const [tag, setTag] = useState("");
   const [loading, setLoading] = useState(false);
+  const [tagsDisponiveis, setTagsDisponiveis] = useState([]);
+
+  useEffect(() => {
+    const fetchTagsDisponiveis = async () => {
+      try {
+        const response = await axios.get(
+          "http://192.168.15.3:5117/api/v1/motos/tags-disponiveis"
+        );
+        if (response.status === 200 && Array.isArray(response.data)) {
+          setTagsDisponiveis(response.data.map((obj) => obj.codigoTag));
+        }
+      } catch (error) {
+        console.log("Erro ao buscar tags disponíveis:", error);
+      }
+    };
+
+    fetchTagsDisponiveis();
+  }, []);
 
   const mapSetorParaId = (nomeSetor) => {
     switch (nomeSetor) {
@@ -62,22 +80,98 @@ export default function CadastrarMoto({ navigation }) {
     }
   };
 
+  const validarCampos = () => {
+    let camposPendentes = [];
+
+    if (temPlaca) {
+      if (!placa.trim()) {
+        camposPendentes.push("Placa");
+      }
+    }
+
+    if (!chassi.trim()) {
+      camposPendentes.push("Chassi");
+    }
+    if (!modeloSelecionado.trim()) {
+      camposPendentes.push("Modelo");
+    }
+    if (!setorSelecionado.trim()) {
+      camposPendentes.push("Setor");
+    }
+    if (!tag.trim()) {
+      camposPendentes.push("Tag");
+    }
+
+    return camposPendentes;
+  };
+
+  const verificarTagDisponivel = () => {
+    return tagsDisponiveis.includes(tag.toUpperCase());
+  };
+
   const cadastrarMoto = async () => {
+    const camposPendentes = validarCampos();
+
+    if (camposPendentes.length > 0) {
+      Alert.alert(
+        "Campos pendentes",
+        `Por favor, preencha os seguintes campos: ${camposPendentes.join(", ")}`
+      );
+      return;
+    }
+
+    if (!verificarTagDisponivel()) {
+      Alert.alert(
+        "Código da tag inválido",
+        "A tag informada não está disponível."
+      );
+      return;
+    }
+
+    setLoading(true);
     const idSetor = mapSetorParaId(setorSelecionado);
 
-    console.log(idSetor);
-    await axios
-      .post("http://192.168.15.3:5117/api/v1/motos", {
-        placa: placa,
-        chassi: chassi,
-        modelo: modeloSelecionado,
-        idSetor: setorSelecionado,
-        codigoTag: tag,
-      })
-      .then((response, a) => {
-        console.log(response.data);
-      })
-      .catch((error) => console.log("erro:", error));
+    try {
+      const response = await axios.post(
+        "http://192.168.15.3:5117/api/v1/motos",
+        {
+          placa: temPlaca ? placa : null,
+          chassi: chassi,
+          modelo: modeloSelecionado,
+          idSetor: idSetor,
+          codigoTag: tag.toUpperCase(),
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
+        setTemPlaca(false);
+        setPlaca("");
+        setChassi("");
+        setModeloSelecionado("");
+        setSetorSelecionado("");
+        setTag("");
+      } else {
+        Alert.alert("Erro", "Falha ao cadastrar a moto, tente novamente.");
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message &&
+        error.response.data.message.toLowerCase().includes("tag")
+      ) {
+        Alert.alert(
+          "Código da tag inválido",
+          "A tag informada não está disponível."
+        );
+      } else {
+        Alert.alert("Erro", "Ocorreu um erro ao cadastrar a moto.");
+      }
+      console.log("erro:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -229,7 +323,7 @@ export default function CadastrarMoto({ navigation }) {
             placeholder="Insira o código da tag"
             placeholderTextColor={colors.textSecondary}
             value={tag}
-            onChangeText={setTag}
+            onChangeText={(t) => setTag(t.toUpperCase())}
             autoCapitalize="characters"
           />
 
@@ -242,11 +336,7 @@ export default function CadastrarMoto({ navigation }) {
             }}
           >
             {loading ? (
-              <ActivityIndicator
-                style={loading}
-                size="large"
-                color={colors.secondary}
-              />
+              <ActivityIndicator color={colors.secondary} size="large" />
             ) : (
               <Btn txt="Cadastrar" pressFunc={() => cadastrarMoto()} />
             )}
@@ -299,7 +389,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 10,
     borderWidth: 1.5,
-
     fontWeight: "500",
   },
   modeloBtn: {
@@ -309,7 +398,6 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     borderWidth: 1,
   },
-
   modeloTexto: {
     fontSize: 18,
     fontWeight: "600",
@@ -328,13 +416,11 @@ const setorStyles = StyleSheet.create({
     borderWidth: 1,
     position: "relative",
   },
-
   nome: {
     fontSize: 18,
     fontWeight: "600",
     flex: 1,
   },
-
   barraCor: {
     position: "absolute",
     top: 0,
