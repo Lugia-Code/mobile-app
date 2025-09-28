@@ -4,29 +4,67 @@ import {
   View,
   Text,
   TextInput,
-  SafeAreaView,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Btn from "../../_components/Btn";
-import Header from "../../_components/Cabecalho";
-import { logOut } from "../../utils/navigation";
 import Cabecalho from "../../_components/Cabecalho";
+import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
+import axios from "axios";
 
-export default function ProurarMoto({ navigation }) {
+export default function ProcurarMoto({ navigation }) {
   const { colors } = useTheme();
   const [chassi, setChassi] = useState("");
   const [placa, setPlaca] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleFindChassi = () => {
-    console.log("Buscando moto com chassi:", chassi);
-  };
+  const handleBuscar = async () => {
+    if (!chassi.trim() && !placa.trim()) {
+      Alert.alert(
+        "Atenção",
+        "Por favor, preencha o campo de chassi ou o campo de placa para buscar."
+      );
+      return;
+    }
 
-  const handleFindPlate = () => {
-    console.log("Buscando moto com placa:", placa);
+    setLoading(true);
+
+    try {
+      let response = null;
+      if (placa.trim()) {
+        response = await axios.get(
+          `http://192.168.15.3:5117/api/v1/motos/buscar/placa/${placa
+            .trim()
+            .toUpperCase()}`
+        );
+      } else if (chassi.trim()) {
+        response = await axios.get(
+          `http://192.168.15.3:5117/api/v1/motos/buscar/chassi/${chassi
+            .trim()
+            .toUpperCase()}`
+        );
+      }
+
+      if (response.status === 200 && response.data) {
+        navigation.push("InfoMoto", { moto: response.data });
+      } else {
+        Alert.alert(
+          "Moto não encontrada",
+          "Não foi possível localizar uma moto com os dados informados."
+        );
+      }
+    } catch (error) {
+      Alert.alert(
+        "Erro na busca",
+        "Ocorreu um erro ao buscar a moto. Verifique os dados e tente novamente."
+      );
+      console.log("Erro na busca:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,6 +91,7 @@ export default function ProurarMoto({ navigation }) {
               placeholderTextColor={colors.textSecondary}
               value={chassi}
               onChangeText={setChassi}
+              autoCapitalize="characters"
             />
           </View>
           <Text style={[styles.ouText, { color: colors.text }]}>ou</Text>
@@ -71,6 +110,7 @@ export default function ProurarMoto({ navigation }) {
               placeholderTextColor={colors.textSecondary}
               value={placa}
               onChangeText={setPlaca}
+              autoCapitalize="characters"
             />
           </View>
 
@@ -83,13 +123,9 @@ export default function ProurarMoto({ navigation }) {
             }}
           >
             {loading ? (
-              <ActivityIndicator
-                style={loading}
-                size="large"
-                color={colors.secondary}
-              />
+              <ActivityIndicator size="large" color={colors.secondary} />
             ) : (
-              <Btn txt="Procurar" pressFunc={() => null} />
+              <Btn txt="Procurar" pressFunc={handleBuscar} />
             )}
           </View>
         </View>

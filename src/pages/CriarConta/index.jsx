@@ -27,9 +27,9 @@ export default function CriarConta({ navigation }) {
   const togglePasswordVisibility = () => {
     setHidePassword(!hidePassword);
   };
+  const newErrors = {};
 
   const validateForm = () => {
-    const newErrors = {};
     if (!email) {
       newErrors.email = "O e-mail é obrigatório.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -57,6 +57,15 @@ export default function CriarConta({ navigation }) {
         .catch((error) => {
           const errorMessage = error.message;
           console.log("Error:", errorMessage);
+
+          console.log(error.code);
+
+          if (error.code === "auth/email-already-in-use") {
+            newErrors.email = "E-mail já cadastrado";
+            setErrors(newErrors);
+            setLoading(false);
+            return Object.keys(newErrors).length === 0;
+          }
         });
     }
   };

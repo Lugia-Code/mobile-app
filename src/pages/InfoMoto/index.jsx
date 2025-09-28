@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Modal,
   FlatList,
+  Alert,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { goBack } from "../../utils/navigation";
@@ -13,16 +14,17 @@ import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import axios from "axios";
 
 const SETORES = [
-  { nome: "Pronta para aluguel" },
-  { nome: "Pendente" },
-  { nome: "Sem placa" },
-  { nome: "Danos estruturais graves" },
-  { nome: "Reparo simples" },
-  { nome: "Agendada para manutenção" },
-  { nome: "Motor defeituoso" },
-  { nome: "Minha Mottu" },
+  { idSetor: 1, nome: "Pronta para aluguel" },
+  { idSetor: 2, nome: "Minha Mottu" },
+  { idSetor: 3, nome: "Pendente" },
+  { idSetor: 4, nome: "Sem placa" },
+  { idSetor: 5, nome: "Reparo simples" },
+  { idSetor: 6, nome: "Danos estruturais graves" },
+  { idSetor: 7, nome: "Motor defeituoso" },
+  { idSetor: 8, nome: "Agendada para manutenção" },
 ];
 
 export default function InfoMoto({ navigation }) {
@@ -32,16 +34,35 @@ export default function InfoMoto({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedSetor, setSelectedSetor] = useState(null);
 
-  const setoresDisponiveis = SETORES.filter((s) => s.nome !== moto.setor);
+  const setoresDisponiveis = SETORES.filter(
+    (s) => s.idSetor !== (moto.setor?.idSetor ?? moto.setor)
+  );
 
   function handleSelectSetor(nome) {
     setSelectedSetor(nome);
     setModalVisible(false);
   }
 
-  function handleSave() {
-    console.log("Setor salvo: ", selectedSetor);
-  }
+  const changeSetor = async () => {
+    const setorObj = SETORES.find((s) => s.nome === selectedSetor);
+    let response = null;
+
+    await axios
+      .put("http://192.168.15.3:5117/api/v1/motos/" + moto.chassi, {
+        idSetor: setorObj.idSetor,
+      })
+      .then((resp) => {
+        console.log(resp.status);
+        console.log(resp.data);
+        response = resp.status;
+      })
+      .catch((error) => console.log("error: " + error))
+      .finally(() => {
+        if (response === 200 || response == 201) {
+          Alert.alert("Setor alterado com sucesso!");
+        }
+      });
+  };
 
   return (
     <>
@@ -54,22 +75,22 @@ export default function InfoMoto({ navigation }) {
         <View style={styles.content}>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              {moto.placa}
+              Placa: {moto.placa ?? "Não informada"}
             </Text>
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              {moto.chassi}
+              Chassi: {moto.chassi}
             </Text>
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              {moto.modelo}
+              Modelo: {moto.modelo}
             </Text>
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              {moto.setor}
+              Setor: {moto.setor?.nome}
             </Text>
           </View>
 
@@ -104,7 +125,7 @@ export default function InfoMoto({ navigation }) {
           {selectedSetor && (
             <TouchableOpacity
               style={[styles.saveButton, { backgroundColor: colors.primary }]}
-              onPress={handleSave}
+              onPress={changeSetor}
               activeOpacity={0.82}
             >
               <Text style={[styles.saveText, { color: colors.surface }]}>
