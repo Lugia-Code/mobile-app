@@ -77,10 +77,10 @@ export default function Setor({ navigation }) {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
-              style={[styles.card, { backgroundColor: colors.secondary }]}
+              style={[styles.card, { backgroundColor: colors.primary }]}
               onPress={() => navigation.push("InfoMoto", { moto: item })}
             >
-              <Text style={[styles.texto, { color: colors.textSecondary }]}>
+              <Text style={[styles.texto, { color: colors.text }]}>
                 <Text style={[styles.label, { color: colors.border }]}>
                   Placa:
                 </Text>

@@ -11,7 +11,7 @@ export default function Setores({ nome, icone, onPressFunc }) {
       style={[
         styles.container,
         {
-          backgroundColor: colors.secondary,
+          backgroundColor: colors.primary,
           shadowColor: colors.border,
           borderColor: colors.border,
         },
