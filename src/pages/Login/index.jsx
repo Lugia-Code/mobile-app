@@ -63,7 +63,7 @@ export default function Login({ navigation }) {
     >
       <View style={styles.logoContainer}>
         <Image
-          source={require("../../../assets/lugiatrack.png")}
+          source={require("../../../assets/trackingcode.png")}
           style={styles.logo}
           height={100}
         />

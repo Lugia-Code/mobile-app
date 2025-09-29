@@ -1,8 +1,8 @@
-# Lugia Track
+# Tracking Code
 
 ## Proposta
 
-Lugia Track é uma solução de RTLS (Real Time Location System) baseada em tecnologia UWB (Ultra Wideband) para localização em tempo real das motos no pátio da Mottu.  
+Tracking Code é uma solução de RTLS (Real Time Location System) baseada em tecnologia UWB (Ultra Wideband) para localização em tempo real das motos no pátio da Mottu.  
 O sistema utiliza ancoras UWB fixas e tags UWB acopladas nas motos para rastrear e monitorar a posição dos veículos, proporcionando controle preciso, automação da gestão e segurança operacional.
 
 A aplicação mobile foi desenvolvida em React Native com Expo, integrando autenticação, consulta, cadastro de motos e consumo de dados do backend via API.
@@ -26,7 +26,7 @@ A aplicação mobile foi desenvolvida em React Native com Expo, integrando auten
 - **Visualização do Pátio:**  
   Exibe os setores do pátio e lista todas as motos presentes em cada setor.
 
-- **Consumo de API Backend com Axios:**  
+- **Consumo de API Backend com Axios:**
   - Listar motos por setor ou global
   - Buscar moto por chassi ou placa
   - Registrar nova moto
@@ -83,6 +83,7 @@ mobile-app/
 ```
 
 Para instalar:
+
 ```bash
 npm install
 # ou
@@ -102,12 +103,14 @@ yarn install
 ### Passos
 
 1. **Clone o repositório**
+
    ```bash
    git clone https://github.com/Lugia-Code/mobile-app.git
    cd mobile-app
    ```
 
 2. **Instale as dependências**
+
    ```bash
    npm install
    # ou
@@ -115,10 +118,12 @@ yarn install
    ```
 
 3. **Configure o Firebase**
+
    - Crie um projeto no [Firebase](https://console.firebase.google.com/)
    - Adicione o arquivo de configuração no projeto conforme a documentação.
 
 4. **Inicie o servidor Expo**
+
    ```bash
    npx expo start
    ```
@@ -131,11 +136,11 @@ yarn install
 
 ## Integrantes
 
-| Nome                                | RM         | GitHub                                |
-|--------------------------------------|------------|----------------------------------------|
-| Nathália Gomes                       | RM554945   | [Nathália Gomes](https://github.com/nathaliagmsss)          |
-| Júlio César Nunes Oliveira           | RM557774   | [Júlio Nunes](https://github.com/JubsHereMan)               |
-| Nathan Magno Gustavo Consolo         | RM558987   | [NathanMagno](https://github.com/NathanMagno)               |
+| Nome                         | RM       | GitHub                                             |
+| ---------------------------- | -------- | -------------------------------------------------- |
+| Nathália Gomes               | RM554945 | [Nathália Gomes](https://github.com/nathaliagmsss) |
+| Júlio César Nunes Oliveira   | RM557774 | [Júlio Nunes](https://github.com/JubsHereMan)      |
+| Nathan Magno Gustavo Consolo | RM558987 | [NathanMagno](https://github.com/NathanMagno)      |
 
 ---
 

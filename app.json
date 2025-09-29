@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "LugiaTrack",
-    "slug": "LugiaTrack",
+    "name": "Tracking Code",
+    "slug": "Tracking Code",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/lugiatrack-icon.png",
+    "icon": "./assets/trackingcode-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/lugiatrack-icon.png",
+      "image": "./assets/trackingcode-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/lugiatrack-icon.png",
+        "foregroundImage": "./assets/trackingcode-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
