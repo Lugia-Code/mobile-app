@@ -148,7 +148,7 @@ yarn install
 
 Em breve: gravação demonstrando o app funcionando em emulador/dispositivo, apresentando todas as funcionalidades.
 
-**[vídeo de demonstração do projeto](#)**
+**[Vídeo de demonstração do aplicativo](https://youtu.be/I8pEreHqhBM)**
 
 ---
 
