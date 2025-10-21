@@ -3,12 +3,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/pages/Login/index";
 import ProcurarMoto from "./src/pages/ProcurarMoto/index";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import CadastrarMoto from "./src/pages/CadastrarMoto/index";
 import Patio from "./src/pages/Patio/index";
 import Participantes from "./src/pages/Participantes/index";
 import Setor from "./src/pages/Setor/index";
 import InfoMoto from "./src/pages/InfoMoto/index";
+import Tag from "./src/pages/Tag/index";
 import CriarConta from "./src/pages/CriarConta/index";
 import { ThemeProvider } from "./src/context/ThemeContext";
 
@@ -22,8 +27,11 @@ function Tabs() {
         tabBarActiveTintColor: "#2D3748",
         tabBarInactiveTintColor: "#30D158",
         tabBarStyle: {
-          height: 60,
+          height: 70,
           paddingBottom: 0.1,
+        },
+        tabBarLabelStyle: {
+          marginTop: 5,
         },
         headerShown: false,
       }}
@@ -32,7 +40,14 @@ function Tabs() {
         name="ProcurarMoto"
         component={ProcurarMoto}
         options={{
-          tabBarIcon: () => <Ionicons name="search" size={26} color="#000" />,
+          tabBarIcon: () => (
+            <Ionicons
+              name="search"
+              size={26}
+              color="#000"
+              style={{ marginTop: 5 }}
+            />
+          ),
           tabBarActiveBackgroundColor: "#30D158",
           tabBarInactiveBackgroundColor: "#2D3748",
         }}
@@ -60,11 +75,32 @@ function Tabs() {
         }}
       />
       <Tab.Screen
+        name="Tags"
+        component={Tag}
+        options={{
+          tabBarIcon: () => (
+            <MaterialIcons
+              name="battery-std"
+              size={26}
+              color="#000"
+              style={{ marginTop: 5 }}
+            />
+          ),
+          tabBarActiveBackgroundColor: "#30D158",
+          tabBarInactiveBackgroundColor: "#2D3748",
+        }}
+      />
+      <Tab.Screen
         name="Participantes"
         component={Participantes}
         options={{
           tabBarIcon: () => (
-            <Ionicons name="people-sharp" size={28} color="#000" />
+            <Ionicons
+              name="people-sharp"
+              size={28}
+              color="#000"
+              style={{ marginTop: 5 }}
+            />
           ),
           tabBarActiveBackgroundColor: "#30D158",
           tabBarInactiveBackgroundColor: "#2D3748",
