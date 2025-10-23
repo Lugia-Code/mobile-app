@@ -16,6 +16,8 @@ import InfoMoto from "./src/pages/InfoMoto/index";
 import Tag from "./src/pages/Tag/index";
 import CriarConta from "./src/pages/CriarConta/index";
 import { ThemeProvider } from "./src/context/ThemeContext";
+import { I18nextProvider } from "react-i18next";
+import I18n from "./src/services/i18n";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,36 +114,38 @@ function Tabs() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="CriarConta"
-            component={CriarConta}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Tabs"
-            component={Tabs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Setor"
-            component={Setor}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="InfoMoto"
-            component={InfoMoto}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ThemeProvider>
+    <I18nextProvider i18n={I18n}>
+      <ThemeProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="CriarConta"
+              component={CriarConta}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Tabs"
+              component={Tabs}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Setor"
+              component={Setor}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InfoMoto"
+              component={InfoMoto}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ThemeProvider>
+    </I18nextProvider>
   );
 }
