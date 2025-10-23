@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "../context/ThemeContext";
 import ThemeToggleButton from "./ThemeToggleButton";
@@ -11,8 +11,17 @@ export default function ContainerScreens({ children }) {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <ThemeToggleButton />
-      <MudarIdioma />
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "baseline",
+          justifyContent: "flex-end",
+        }}
+      >
+        <ThemeToggleButton />
+        <MudarIdioma />
+      </View>
       {children}
     </SafeAreaView>
   );

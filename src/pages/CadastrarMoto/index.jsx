@@ -17,6 +17,7 @@ import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 
@@ -32,6 +33,7 @@ const setoresDisponiveis = [
 ];
 
 export default function CadastrarMoto({ navigation }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [temPlaca, setTemPlaca] = useState(false);
   const [placa, setPlaca] = useState("");

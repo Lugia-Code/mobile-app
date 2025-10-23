@@ -14,8 +14,10 @@ import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export default function ProcurarMoto({ navigation }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [chassi, setChassi] = useState("");
   const [placa, setPlaca] = useState("");
@@ -87,7 +89,7 @@ export default function ProcurarMoto({ navigation }) {
             />
             <TextInput
               style={{ color: colors.textSecondary }}
-              placeholder="Informe o chassi da moto"
+              placeholder={t("informe o chassi da moto")}
               placeholderTextColor={colors.textSecondary}
               value={chassi}
               onChangeText={setChassi}
