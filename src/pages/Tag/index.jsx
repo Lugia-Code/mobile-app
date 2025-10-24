@@ -12,7 +12,7 @@ export default function Tag({ navigation }) {
       <Cabecalho
         iconName="logout"
         onIconPress={() => logOut(navigation)}
-        title="Informações das Tags"
+        title={t("Informações das Tags")}
       />
       <ContainerScreens></ContainerScreens>
     </>

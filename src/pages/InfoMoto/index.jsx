@@ -61,7 +61,7 @@ export default function InfoMoto({ navigation }) {
       .catch((error) => console.log("error: " + error))
       .finally(() => {
         if (response === 200 || response == 201) {
-          Alert.alert("Setor alterado com sucesso!");
+          Alert.alert(t("Setor alterado com sucesso!"));
         }
       });
   };
@@ -69,7 +69,7 @@ export default function InfoMoto({ navigation }) {
   return (
     <>
       <Cabecalho
-        title="Informações da moto"
+        title={t("Informações da moto")}
         iconName="arrow-back"
         onIconPress={() => goBack(navigation)}
       />
@@ -77,12 +77,12 @@ export default function InfoMoto({ navigation }) {
         <View style={styles.content}>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              Placa: {moto.placa ?? "Não informada"}
+              {t("Placa")}: {moto.placa ?? t(" Não informada")}
             </Text>
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              Chassi: {moto.chassi}
+              {t("Chassi")}: {moto.chassi}
             </Text>
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
@@ -92,7 +92,7 @@ export default function InfoMoto({ navigation }) {
           </View>
           <View style={[styles.infoBox, { backgroundColor: colors.surface }]}>
             <Text style={[styles.infoText, { color: colors.text }]}>
-              Setor: {moto.setor?.nome}
+              {t("Setor")}: {moto.setor?.nome}
             </Text>
           </View>
 
@@ -105,7 +105,7 @@ export default function InfoMoto({ navigation }) {
             activeOpacity={0.82}
           >
             <Text style={[styles.desvincularText, { color: colors.text }]}>
-              Desvincular
+              {t("Desvincular")}
             </Text>
           </TouchableOpacity>
 
@@ -114,7 +114,7 @@ export default function InfoMoto({ navigation }) {
             style={[styles.selectBox, { backgroundColor: colors.text }]}
           >
             <Text style={[styles.selectText, { color: colors.primary }]}>
-              {selectedSetor ? selectedSetor : "Trocar setor"}
+              {selectedSetor ? selectedSetor : t("Trocar setor")}
             </Text>
             <SimpleLineIcons
               name="arrow-down"
@@ -131,7 +131,7 @@ export default function InfoMoto({ navigation }) {
               activeOpacity={0.82}
             >
               <Text style={[styles.saveText, { color: colors.surface }]}>
-                Salvar
+                {t("Salvar")}
               </Text>
             </TouchableOpacity>
           )}

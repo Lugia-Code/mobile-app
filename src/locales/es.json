@@ -49,5 +49,15 @@
     "Setor vindo da rota:": "Sector proveniente de la ruta:",
     "idSetor resultante:": "Identificación del sector resultante:",
     "  Não informada": "  No informado",
-    "Nenhuma moto nesse setor.": "No hay motocicletas en este sector."
+    "Nenhuma moto nesse setor.": "No hay motocicletas en este sector.",
+    "Informações das Tags": "Información de la etiqueta",
+    "Integrantes": "Miembros",
+    "Conexões": "Conexiones",
+    "Integrante": "Miembro",
+    "Setor alterado com sucesso!": "¡El sector cambió exitosamente!",
+    "Informações da moto": "Información de la motocicleta",
+    "Setor": "Sector",
+    "Trocar setor": "Cambiar sector",
+    "Desvincular": "Desconectar",
+    "Salvar": "Ahorrar"
 }

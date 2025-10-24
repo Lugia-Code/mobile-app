@@ -51,7 +51,7 @@ export default function Participantes({ navigation }) {
   return (
     <>
       <Cabecalho
-        title="Integrantes"
+        title={t("Integrantes")}
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
@@ -81,7 +81,7 @@ export default function Participantes({ navigation }) {
             <Image style={styles.avatar} source={member.urlImage} />
             <View style={styles.infoBox}>
               <Text style={[styles.role, { color: colors.text }]}>
-                Integrante
+                {t("Integrante")}
               </Text>
               <Text style={[styles.name, { color: colors.text }]}>
                 {member.nome}
@@ -92,7 +92,7 @@ export default function Participantes({ navigation }) {
             </View>
           </View>
           <Text style={[styles.connections, { color: colors.text }]}>
-            Conexões
+            {t("Conexões")}
           </Text>
           <View style={styles.iconRow}>
             <TouchableOpacity onPress={() => openUrl(member.github)}>
