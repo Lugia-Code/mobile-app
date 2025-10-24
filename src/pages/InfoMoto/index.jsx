@@ -15,6 +15,7 @@ import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const SETORES = [
   { idSetor: 1, nome: "Pronta para aluguel" },

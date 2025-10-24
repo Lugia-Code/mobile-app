@@ -30,11 +30,11 @@ const members = [
     linkedin: "https://www.linkedin.com/in/jubshere/",
   },
   {
-    nome: "Nathália Gomes",
-    rm: "RM 554945",
-    urlImage: require("../../../assets/Nathalia.jpg"),
-    github: "https://github.com/nathaliagmsss",
-    linkedin: "https://www.linkedin.com/in/nathaliagmsss/",
+    nome: "Julia Vasconcelos",
+    rm: "RM 558785",
+    urlImage: require("../../../assets/julia.jpg"),
+    github: "https://github.com/juvascoli",
+    linkedin: "https://www.linkedin.com/in/julia-vasconcelos-6009a9285/",
   },
 ];
 

@@ -27,5 +27,6 @@ const styles = StyleSheet.create({
     marginRight: "8%",
     width: 30,
     height: 30,
+    position: "static",
   },
 });
