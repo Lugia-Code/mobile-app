@@ -63,21 +63,21 @@ export default function CadastrarMoto({ navigation }) {
 
   const mapSetorParaId = (nomeSetor) => {
     switch (nomeSetor) {
-      case "Pronta para aluguel":
+      case t("Pronta para aluguel"):
         return 1;
-      case "Minha Mottu":
+      case t("Minha Mottu"):
         return 2;
-      case "Pendente":
+      case t("Pendente"):
         return 3;
-      case "Sem placa":
+      case t("Sem placa"):
         return 4;
-      case "Reparo simples":
+      case t("Reparo simples"):
         return 5;
-      case "Danos estruturais graves":
+      case t("Danos estruturais graves"):
         return 6;
-      case "Motor defeituoso":
+      case t("Motor defeituoso"):
         return 7;
-      case "Agendada para manutenção":
+      case t("Agendada para manutenção"):
         return 8;
     }
   };
@@ -116,16 +116,18 @@ export default function CadastrarMoto({ navigation }) {
 
     if (camposPendentes.length > 0) {
       Alert.alert(
-        "Campos pendentes",
-        `Por favor, preencha os seguintes campos: ${camposPendentes.join(", ")}`
+        t("Campos pendentes"),
+        `${t(
+          "Por favor, preencha os seguintes campos"
+        )}: ${camposPendentes.join(", ")}`
       );
       return;
     }
 
     if (!verificarTagDisponivel()) {
       Alert.alert(
-        "Código da tag inválido",
-        "A tag informada não está disponível."
+        t("Código da tag inválido"),
+        t("A tag informada não está disponível.")
       );
       return;
     }
@@ -146,7 +148,7 @@ export default function CadastrarMoto({ navigation }) {
       );
 
       if (response.status === 200 || response.status === 201) {
-        Alert.alert("Sucesso", "Moto cadastrada com sucesso!");
+        Alert.alert(t("Sucesso"), t("Moto cadastrada com sucesso!"));
         setTemPlaca(false);
         setPlaca("");
         setChassi("");
@@ -154,7 +156,10 @@ export default function CadastrarMoto({ navigation }) {
         setSetorSelecionado("");
         setTag("");
       } else {
-        Alert.alert("Erro", "Falha ao cadastrar a moto, tente novamente.");
+        Alert.alert(
+          t("Erro"),
+          t("Falha ao cadastrar a moto, tente novamente.")
+        );
       }
     } catch (error) {
       if (
@@ -164,11 +169,11 @@ export default function CadastrarMoto({ navigation }) {
         error.response.data.message.toLowerCase().includes("tag")
       ) {
         Alert.alert(
-          "Código da tag inválido",
-          "A tag informada não está disponível."
+          t("Código da tag inválido"),
+          t("A tag informada não está disponível.")
         );
       } else {
-        Alert.alert("Erro", "Ocorreu um erro ao cadastrar a moto.");
+        Alert.alert(t("Erro"), t("Ocorreu um erro ao cadastrar a moto."));
       }
       console.log("erro:", error);
     } finally {
@@ -179,7 +184,7 @@ export default function CadastrarMoto({ navigation }) {
   return (
     <>
       <Cabecalho
-        title="Cadastrar Moto"
+        title={t("Cadastrar Moto")}
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
@@ -211,19 +216,21 @@ export default function CadastrarMoto({ navigation }) {
               )}
             </Pressable>
             <Text style={[styles.checkboxLabel, { color: colors.text }]}>
-              Tem placa?
+              {t("Tem placa?")}
             </Text>
           </View>
 
           {temPlaca && (
             <>
-              <Text style={[styles.label, { color: colors.text }]}>Placa</Text>
+              <Text style={[styles.label, { color: colors.text }]}>
+                {t("Placa")}
+              </Text>
               <TextInput
                 style={[
                   styles.input,
                   { backgroundColor: colors.surface, color: colors.text },
                 ]}
-                placeholder="Informe a placa"
+                placeholder={t("Informe a placa")}
                 placeholderTextColor={colors.textSecondary}
                 value={placa}
                 onChangeText={setPlaca}
@@ -233,20 +240,22 @@ export default function CadastrarMoto({ navigation }) {
             </>
           )}
 
-          <Text style={[styles.label, { color: colors.text }]}>Chassi</Text>
+          <Text style={[styles.label, { color: colors.text }]}>
+            {t("Chassi")}
+          </Text>
           <TextInput
             style={[
               styles.input,
               { backgroundColor: colors.surface, color: colors.text },
             ]}
-            placeholder="Informe o chassi"
+            placeholder={t("Informe o chassi")}
             placeholderTextColor={colors.textSecondary}
             value={chassi}
             onChangeText={setChassi}
           />
 
           <Text style={[styles.label, { color: colors.text }]}>
-            Modelo da moto
+            {t("Modelo da moto")}
           </Text>
           {modelosDisponiveis.map((item) => (
             <TouchableOpacity
@@ -275,7 +284,7 @@ export default function CadastrarMoto({ navigation }) {
           <Text
             style={[[styles.label, { color: colors.text }], { marginTop: 22 }]}
           >
-            Direcionar para setor
+            {t("Direcionar para setor")}
           </Text>
           {setoresDisponiveis.map((item) => {
             const selecionado = setorSelecionado === item.nome;
@@ -296,7 +305,7 @@ export default function CadastrarMoto({ navigation }) {
                     selecionado && { color: colors.primary },
                   ]}
                 >
-                  {item.nome}
+                  {t(item.nome)}
                 </Text>
                 <Ionicons
                   name={item.icone}
@@ -322,7 +331,7 @@ export default function CadastrarMoto({ navigation }) {
               styles.input,
               { backgroundColor: colors.surface, color: colors.text },
             ]}
-            placeholder="Insira o código da tag"
+            placeholder={t("Insira o código da tag")}
             placeholderTextColor={colors.textSecondary}
             value={tag}
             onChangeText={(t) => setTag(t.toUpperCase())}
@@ -340,7 +349,7 @@ export default function CadastrarMoto({ navigation }) {
             {loading ? (
               <ActivityIndicator color={colors.secondary} size="large" />
             ) : (
-              <Btn txt="Cadastrar" pressFunc={() => cadastrarMoto()} />
+              <Btn txt={t("Cadastrar")} pressFunc={() => cadastrarMoto()} />
             )}
           </View>
         </ScrollView>

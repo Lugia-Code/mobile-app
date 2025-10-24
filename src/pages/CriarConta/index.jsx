@@ -63,7 +63,7 @@ export default function CriarConta({ navigation }) {
           console.log(error.code);
 
           if (error.code === "auth/email-already-in-use") {
-            newErrors.email = "E-mail já cadastrado";
+            newErrors.email = t("E-mail já cadastrado");
             setErrors(newErrors);
             setLoading(false);
             return Object.keys(newErrors).length === 0;
@@ -80,7 +80,7 @@ export default function CriarConta({ navigation }) {
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <TextInput
             style={[styles.input, { color: colors.text }]}
-            placeholder="Insira seu e-mail"
+            placeholder={t("Insira seu e-mail")}
             placeholderTextColor={colors.textSecondary}
             keyboardType="email-address"
             textContentType="emailAddress"
@@ -97,7 +97,7 @@ export default function CriarConta({ navigation }) {
           <View style={styles.passwordRow}>
             <TextInput
               style={[styles.input, { flex: 1, color: colors.text }]}
-              placeholder="Crie uma senha"
+              placeholder={t("Crie uma senha")}
               placeholderTextColor={colors.textSecondary}
               secureTextEntry={hidePassword}
               value={password}
@@ -137,7 +137,7 @@ export default function CriarConta({ navigation }) {
               color={colors.secondary}
             />
           ) : (
-            <Btn txt="Criar Conta" pressFunc={createAccount} />
+            <Btn txt={t("Criar Conta")} pressFunc={createAccount} />
           )}
         </View>
       </View>

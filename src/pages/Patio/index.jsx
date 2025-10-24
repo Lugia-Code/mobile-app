@@ -4,10 +4,11 @@ import { logOut } from "../../utils/navigation";
 import { useTheme } from "../../context/ThemeContext";
 import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { useTranslation } from "react-i18next";
 
 export default function Patio({ navigation }) {
   const { colors } = useTheme();
-
+  const { t } = useTranslation();
   return (
     <>
       <Cabecalho
