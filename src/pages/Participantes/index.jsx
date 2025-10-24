@@ -12,6 +12,7 @@ import Cabecalho from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
+import { useTranslation } from "react-i18next";
 
 const members = [
   {
@@ -38,6 +39,7 @@ const members = [
 ];
 
 export default function Participantes({ navigation }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const member = members[selectedIndex];

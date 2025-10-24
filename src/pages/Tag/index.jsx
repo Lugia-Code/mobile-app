@@ -3,8 +3,10 @@ import React from "react";
 import Cabecalho from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";
+import { useTranslation } from "react-i18next";
 
 export default function Tag({ navigation }) {
+  const { t } = useTranslation();
   return (
     <>
       <Cabecalho

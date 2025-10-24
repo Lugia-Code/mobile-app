@@ -43,5 +43,11 @@
     "Modelo da moto": "Modelo de motocicleta",
     "Direcionar para setor": "Objetivo al sector",
     "Insira o código da tag": "Ingrese el código de etiqueta",
-    "Cadastrar": "Registrar"
+    "Cadastrar": "Registrar",
+    "Pátio": "Patio",
+    "Selecione o setor que deseja verificar": "Seleccione el sector que desea consultar",
+    "Setor vindo da rota:": "Sector proveniente de la ruta:",
+    "idSetor resultante:": "Identificación del sector resultante:",
+    "  Não informada": "  No informado",
+    "Nenhuma moto nesse setor.": "No hay motocicletas en este sector."
 }

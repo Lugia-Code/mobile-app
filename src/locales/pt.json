@@ -2,7 +2,7 @@
     "Informe o chassi da moto": "Informe o chassi da moto",
     "Informe a placa da moto": "Informe a placa da moto",
     "Procurar": "Procurar",
-    "Insira seu e-mail": "Ingresa tu correo electrónico",
+    "Insira seu e-mail": "Insira seu e-mail",
     "Insira sua senha": "Insira sua senha",
     "Criar Conta": "Criar Conta",
     "Preencha todos os campos!": "Preencha todos os campos!",
@@ -43,5 +43,11 @@
     "Modelo da moto": "Modelo da moto",
     "Direcionar para setor": "Direcionar para setor",
     "Insira o código da tag": "Insira o código da tag",
-    "Cadastrar": "Cadastrar"
+    "Cadastrar": "Cadastrar",
+    "Pátio": "Pátio",
+    "Selecione o setor que deseja verificar": "Selecione o setor que deseja verificar",
+    "Setor vindo da rota:": "Setor vindo da rota:",
+    "idSetor resultante:": "idSetor resultante:",
+    "  Não informada": "  Não informada",
+    "Nenhuma moto nesse setor.": "Nenhuma moto nesse setor."
 }

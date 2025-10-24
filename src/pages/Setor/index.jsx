@@ -6,39 +6,41 @@ import Cabecalho from "../../_components/Cabecalho";
 import ContainerScreens from "../../_components/ContainerScreens";
 import { useTheme } from "../../context/ThemeContext";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export default function Setor({ navigation }) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const route = useRoute();
   const { setor } = route.params;
   const [motos, setMotos] = useState([]);
 
   const mapSetorParaId = (nomeSetor) => {
     switch (nomeSetor) {
-      case "Pronta para aluguel":
+      case t("Pronta para aluguel"):
         return 1;
-      case "Minha Mottu":
+      case t("Minha Mottu"):
         return 2;
-      case "Pendente":
+      case t("Pendente"):
         return 3;
-      case "Sem placa":
+      case t("Sem placa"):
         return 4;
-      case "Reparo simples":
+      case t("Reparo simples"):
         return 5;
-      case "Danos estruturais graves":
+      case t("Danos estruturais graves"):
         return 6;
-      case "Motor defeituoso":
+      case t("Motor defeituoso"):
         return 7;
-      case "Agendada para manutenção":
+      case t("Agendada para manutenção"):
         return 8;
     }
   };
 
   useEffect(() => {
     const fetchMotosBySetor = async () => {
-      console.log("Setor vindo da rota:", setor);
+      console.log(t("Setor vindo da rota:"), setor);
       const idSetor = mapSetorParaId(setor);
-      console.log("idSetor resultante:", idSetor);
+      console.log(t("idSetor resultante:"), idSetor);
 
       if (!idSetor) {
         console.log("idSetor não encontrado!");
@@ -67,7 +69,7 @@ export default function Setor({ navigation }) {
   return (
     <>
       <Cabecalho
-        title={setor}
+        title={t(setor)}
         onIconPress={() => goBack(navigation)}
         iconName="arrow-back"
       />
@@ -82,13 +84,13 @@ export default function Setor({ navigation }) {
             >
               <Text style={[styles.texto, { color: colors.text }]}>
                 <Text style={[styles.label, { color: colors.border }]}>
-                  Placa:
+                  {t("Placa")}:
                 </Text>
-                {item.placa ?? "  Não informada"}
+                {item.placa ?? t("  Não informada")}
               </Text>
               <Text style={[styles.texto, { color: colors.text }]}>
                 <Text style={[styles.label, { color: colors.border }]}>
-                  Chassi:
+                  {t("Chassi")}:
                 </Text>
                 {"  "}
                 {item.chassi}
@@ -104,7 +106,7 @@ export default function Setor({ navigation }) {
           )}
           ListEmptyComponent={
             <Text style={[styles.texto, { color: colors.text }]}>
-              Nenhuma moto nesse setor.
+              {t("Nenhuma moto nesse setor.")}
             </Text>
           }
         />

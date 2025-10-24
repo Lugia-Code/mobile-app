@@ -12,38 +12,38 @@ export default function Patio({ navigation }) {
   return (
     <>
       <Cabecalho
-        title="Pátio"
+        title={t("Pátio")}
         iconName="logout"
         onIconPress={() => logOut(navigation)}
       />
       <ContainerScreens>
         <Text style={[styles.info, { color: colors.text }]}>
-          Selecione o setor que deseja verificar
+          {t("Selecione o setor que deseja verificar")}
         </Text>
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Setores
-            nome="Pronta para aluguel"
+            nome={t("Pronta para aluguel")}
             icone="checkmark-circle"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Pronta para aluguel" })
             }
           />
           <Setores
-            nome="Pendente"
+            nome={t("Pendente")}
             icone="time-sharp"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Pendente" })
             }
           />
           <Setores
-            nome="Sem placa"
+            nome={t("Sem placa")}
             icone="close-circle"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Sem placa" })
             }
           />
           <Setores
-            nome="Danos estruturais graves"
+            nome={t("Danos estruturais graves")}
             icone="warning"
             onPressFunc={() =>
               navigation.navigate("Setor", {
@@ -52,14 +52,14 @@ export default function Patio({ navigation }) {
             }
           />
           <Setores
-            nome="Reparo simples"
+            nome={t("Reparo simples")}
             icone="construct"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Reparo simples" })
             }
           />
           <Setores
-            nome="Agendada para manutenção"
+            nome={t("Agendada para manutenção")}
             icone="calendar"
             onPressFunc={() =>
               navigation.navigate("Setor", {
@@ -68,14 +68,14 @@ export default function Patio({ navigation }) {
             }
           />
           <Setores
-            nome="Motor defeituoso"
+            nome={t("Motor defeituoso")}
             icone="cog"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Motor defeituoso" })
             }
           />
           <Setores
-            nome="Minha Mottu"
+            nome={t("Minha Mottu")}
             icone="person"
             onPressFunc={() =>
               navigation.navigate("Setor", { setor: "Minha Mottu" })

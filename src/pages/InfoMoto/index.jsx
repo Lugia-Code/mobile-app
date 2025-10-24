@@ -29,6 +29,7 @@ const SETORES = [
 
 export default function InfoMoto({ navigation }) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const route = useRoute();
   const { moto } = route.params;
   const [modalVisible, setModalVisible] = useState(false);
