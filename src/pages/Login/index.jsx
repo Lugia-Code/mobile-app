@@ -16,10 +16,11 @@ import { useTheme } from "../../context/ThemeContext";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseConfig";
 import { logIn, Stack } from "../../utils/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function Login({ navigation }) {
   const { colors } = useTheme();
-
+  const { t } = useTranslation();
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,14 +35,14 @@ export default function Login({ navigation }) {
     setLoading(true);
 
     if (!email || !password) {
-      Alert.alert("Atenção", "Preencha todos os campos!");
+      Alert.alert(t("Atenção"), t("Preencha todos os campos!"));
       setLoading(false);
       return;
     }
 
     signInWithEmailAndPassword(auth, email, password)
       .then(async () => {
-        Alert.alert("Sucesso ao logar", `Usuário logado com sucesso!`);
+        Alert.alert(t("Sucesso ao logar"), t("Usuário logado com sucesso!"));
         logIn(navigation);
       })
       .catch((error) => {
@@ -49,9 +50,9 @@ export default function Login({ navigation }) {
         const errorCode = error.code;
         let message = "";
         if (errorCode === "auth/invalid-credential") {
-          message = "E-mail ou senha incorretos! Tente novamente";
+          message = t("E-mail ou senha incorretos! Tente novamente");
         } else {
-          message = "Erro ao fazer login. Tente novamente mais tarde.";
+          message = t("Erro ao fazer login. Tente novamente mais tarde.");
         }
         setError(message);
       });
@@ -76,7 +77,7 @@ export default function Login({ navigation }) {
         <View style={[styles.inputBox, { backgroundColor: colors.surface }]}>
           <TextInput
             style={[styles.input, { color: colors.text }]}
-            placeholder="Insira seu e-mail"
+            placeholder={t("Insira seu e-mail")}
             placeholderTextColor={colors.textSecondary}
             keyboardType="email-address"
             textContentType="emailAddress"
@@ -90,7 +91,7 @@ export default function Login({ navigation }) {
           <View style={styles.passwordRow}>
             <TextInput
               style={[styles.input, { flex: 1, color: colors.text }]}
-              placeholder="Insira sua senha"
+              placeholder={t("Insira sua senha")}
               placeholderTextColor={colors.textSecondary}
               secureTextEntry={hidePassword}
               value={password}
@@ -144,7 +145,7 @@ export default function Login({ navigation }) {
             bottom: 0,
           }}
         >
-          Criar Conta
+          {t("Criar Conta")}
         </Text>
       </View>
     </SafeAreaView>

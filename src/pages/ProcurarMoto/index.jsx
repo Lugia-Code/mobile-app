@@ -89,7 +89,7 @@ export default function ProcurarMoto({ navigation }) {
             />
             <TextInput
               style={{ color: colors.textSecondary }}
-              placeholder={t("informe o chassi da moto")}
+              placeholder={t("Informe o chassi da moto")}
               placeholderTextColor={colors.textSecondary}
               value={chassi}
               onChangeText={setChassi}
@@ -108,7 +108,7 @@ export default function ProcurarMoto({ navigation }) {
             />
             <TextInput
               style={{ color: colors.textSecondary }}
-              placeholder="Informe a placa da moto"
+              placeholder={t("Informe a placa da moto")}
               placeholderTextColor={colors.textSecondary}
               value={placa}
               onChangeText={setPlaca}
@@ -127,7 +127,7 @@ export default function ProcurarMoto({ navigation }) {
             {loading ? (
               <ActivityIndicator size="large" color={colors.secondary} />
             ) : (
-              <Btn txt="Procurar" pressFunc={handleBuscar} />
+              <Btn txt={t("Procurar")} pressFunc={handleBuscar} />
             )}
           </View>
         </View>

@@ -15,8 +15,10 @@ import Btn from "../../_components/Btn";
 import { auth } from "../../services/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { logIn } from "../../utils/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function CriarConta({ navigation }) {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [hidePassword, setHidePassword] = useState(true);
   const [email, setEmail] = useState("");
@@ -31,14 +33,14 @@ export default function CriarConta({ navigation }) {
 
   const validateForm = () => {
     if (!email) {
-      newErrors.email = "O e-mail é obrigatório.";
+      newErrors.email = t("O e-mail é obrigatório.");
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Digite um e-mail válido.";
+      newErrors.email = t("Digite um e-mail válido.");
     }
     if (!password) {
-      newErrors.password = "A senha é obrigatória.";
+      newErrors.password = t("A senha é obrigatória.");
     } else if (password.length < 6) {
-      newErrors.password = "A senha deve ter pelo menos 6 caracteres.";
+      newErrors.password = t("A senha deve ter pelo menos 6 caracteres.");
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -52,7 +54,7 @@ export default function CriarConta({ navigation }) {
       createUserWithEmailAndPassword(auth, email, password)
         .then(async () => {
           logIn(navigation);
-          Alert.alert("Contra criada com Sucesso!");
+          Alert.alert(t("Contra criada com Sucesso!"));
         })
         .catch((error) => {
           const errorMessage = error.message;

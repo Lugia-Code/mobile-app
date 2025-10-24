@@ -1,3 +1,18 @@
 {
-    "informe o chassi da moto": "informe o chassi da moto"
+    "Informe o chassi da moto": "Informe o chassi da moto",
+    "Informe a placa da moto": "Informe a placa da moto",
+    "Procurar": "Procurar",
+    "Insira seu e-mail": "Ingresa tu correo electrónico",
+    "Insira sua senha": "Insira sua senha",
+    "Criar Conta": "Criar Conta",
+    "Preencha todos os campos!": "Preencha todos os campos!",
+    "Atenção": "Atenção",
+    "Sucesso ao logar": "Sucesso ao logar",
+    "E-mail ou senha incorretos! Tente novamente": "E-mail ou senha incorretos! Tente novamente",
+    "Erro ao fazer login. Tente novamente mais tarde.": "Erro ao fazer login. Tente novamente mais tarde.",
+    "O e-mail é obrigatório.": "O e-mail é obrigatório.",
+    "Digite um e-mail válido.": "Digite um e-mail válido.",
+    "A senha é obrigatória.": "A senha é obrigatória.",
+    "A senha deve ter pelo menos 6 caracteres.": "A senha deve ter pelo menos 6 caracteres.",
+    "Contra criada com Sucesso!": "Contra criada com Sucesso!"
 }

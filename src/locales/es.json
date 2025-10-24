@@ -1,3 +1,18 @@
 {
-    "informe o chassi da moto": "informar al chasis de la motocicleta"
+    "Informe o chassi da moto": "Informar al chasis de la motocicleta",
+    "Informe a placa da moto": "Informar la matrícula de la motocicleta",
+    "Procurar": "Buscar",
+    "Insira seu e-mail": "Ingresa tu correo electrónico",
+    "Insira sua senha": "Introduce tu contraseña",
+    "Criar Conta": "Crear una Cuenta",
+    "Preencha todos os campos!": "¡Rellene todos los campos!",
+    "Atenção": "Atención",
+    "Sucesso ao logar": "Inicio de sesión exitoso",
+    "E-mail ou senha incorretos! Tente novamente": "¡Correo electrónico o contraseña incorrectos! Inténtalo de nuevo.",
+    "Erro ao fazer login. Tente novamente mais tarde.": "Error al iniciar sesión. Inténtalo de nuevo más tarde.",
+    "O e-mail é obrigatório.": "Se requiere correo electrónico.",
+    "Digite um e-mail válido.": "Introduzca una dirección de correo electrónico válida.",
+    "A senha é obrigatória.": "Se requiere contraseña.",
+    "A senha deve ter pelo menos 6 caracteres.": "La contraseña debe tener al menos 6 caracteres.",
+    "Contra criada com Sucesso!": "¡Contador creado exitosamente!"
 }
