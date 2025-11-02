@@ -19,8 +19,8 @@ import { useTheme } from "../../context/ThemeContext";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
+const API_BASE = "http://192.168.15.3:5117/api/v1";
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
-
 const setoresDisponiveis = [
   { nome: "Pronta para aluguel", icone: "checkmark-circle" },
   { nome: "Pendente", icone: "time-sharp" },
@@ -43,23 +43,7 @@ export default function CadastrarMoto({ navigation }) {
   const [tag, setTag] = useState("");
   const [loading, setLoading] = useState(false);
   const [tagsDisponiveis, setTagsDisponiveis] = useState([]);
-
-  useEffect(() => {
-    const fetchTagsDisponiveis = async () => {
-      try {
-        const response = await axios.get(
-          "http://192.168.15.3:5117/api/v1/motos/tags-disponiveis"
-        );
-        if (response.status === 200 && Array.isArray(response.data)) {
-          setTagsDisponiveis(response.data.map((obj) => obj.codigoTag));
-        }
-      } catch (error) {
-        console.log("Erro ao buscar tags disponíveis:", error);
-      }
-    };
-
-    fetchTagsDisponiveis();
-  }, []);
+  const [novoSetor, setNovoSetor] = useState("");
 
   const mapSetorParaId = (nomeSetor) => {
     switch (nomeSetor) {
@@ -79,41 +63,25 @@ export default function CadastrarMoto({ navigation }) {
         return 7;
       case t("Agendada para manutenção"):
         return 8;
+      default:
+        return null;
     }
   };
 
   const validarCampos = () => {
     let camposPendentes = [];
-
     if (temPlaca) {
-      if (!placa.trim()) {
-        camposPendentes.push("Placa");
-      }
+      if (!placa.trim()) camposPendentes.push("Placa");
     }
-
-    if (!chassi.trim()) {
-      camposPendentes.push("Chassi");
-    }
-    if (!modeloSelecionado.trim()) {
-      camposPendentes.push("Modelo");
-    }
-    if (!setorSelecionado.trim()) {
-      camposPendentes.push("Setor");
-    }
-    if (!tag.trim()) {
-      camposPendentes.push("Tag");
-    }
-
+    if (!chassi.trim()) camposPendentes.push("Chassi");
+    if (!modeloSelecionado.trim()) camposPendentes.push("Modelo");
+    if (!setorSelecionado.trim()) camposPendentes.push("Setor");
+    if (!tag.trim()) camposPendentes.push("Tag");
     return camposPendentes;
-  };
-
-  const verificarTagDisponivel = () => {
-    return tagsDisponiveis.includes(tag.toUpperCase());
   };
 
   const cadastrarMoto = async () => {
     const camposPendentes = validarCampos();
-
     if (camposPendentes.length > 0) {
       Alert.alert(
         t("Campos pendentes"),
@@ -124,29 +92,16 @@ export default function CadastrarMoto({ navigation }) {
       return;
     }
 
-    if (!verificarTagDisponivel()) {
-      Alert.alert(
-        t("Código da tag inválido"),
-        t("A tag informada não está disponível.")
-      );
-      return;
-    }
-
     setLoading(true);
     const idSetor = mapSetorParaId(setorSelecionado);
-
     try {
-      const response = await axios.post(
-        "http://192.168.15.3:5117/api/v1/motos",
-        {
-          placa: temPlaca ? placa : null,
-          chassi: chassi,
-          modelo: modeloSelecionado,
-          idSetor: idSetor,
-          codigoTag: tag.toUpperCase(),
-        }
-      );
-
+      const response = await axios.post(`localhost:5100/api/v1/motos`, {
+        placa: temPlaca ? placa : null,
+        chassi: chassi,
+        modelo: modeloSelecionado,
+        idSetor: idSetor,
+        codigoTag: tag,
+      });
       if (response.status === 200 || response.status === 201) {
         Alert.alert(t("Sucesso"), t("Moto cadastrada com sucesso!"));
         setTemPlaca(false);
@@ -155,6 +110,7 @@ export default function CadastrarMoto({ navigation }) {
         setModeloSelecionado("");
         setSetorSelecionado("");
         setTag("");
+        fetchTagsDisponiveis();
       } else {
         Alert.alert(
           t("Erro"),
@@ -162,22 +118,19 @@ export default function CadastrarMoto({ navigation }) {
         );
       }
     } catch (error) {
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message &&
-        error.response.data.message.toLowerCase().includes("tag")
-      ) {
+      if (error.response) {
+        Alert.alert("Erro API", JSON.stringify(error.response.data));
+        console.log("API error data", error.response.data);
+      } else if (error.request) {
         Alert.alert(
-          t("Código da tag inválido"),
-          t("A tag informada não está disponível.")
+          "Erro de conexão",
+          "A requisição não saiu do app. Verifique o IP (use o do Postman) e se está na mesma Wi-fi do servidor."
         );
+        console.log("Erro de request", error.request);
       } else {
-        Alert.alert(t("Erro"), t("Ocorreu um erro ao cadastrar a moto."));
+        Alert.alert("Erro desconhecido", error.message);
+        console.log("Erro desconhecido", error.message);
       }
-      console.log("erro:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -219,7 +172,6 @@ export default function CadastrarMoto({ navigation }) {
               {t("Tem placa?")}
             </Text>
           </View>
-
           {temPlaca && (
             <>
               <Text style={[styles.label, { color: colors.text }]}>
@@ -239,7 +191,6 @@ export default function CadastrarMoto({ navigation }) {
               />
             </>
           )}
-
           <Text style={[styles.label, { color: colors.text }]}>
             {t("Chassi")}
           </Text>
@@ -253,7 +204,6 @@ export default function CadastrarMoto({ navigation }) {
             value={chassi}
             onChangeText={setChassi}
           />
-
           <Text style={[styles.label, { color: colors.text }]}>
             {t("Modelo da moto")}
           </Text>
@@ -280,7 +230,6 @@ export default function CadastrarMoto({ navigation }) {
               </Text>
             </TouchableOpacity>
           ))}
-
           <Text
             style={[[styles.label, { color: colors.text }], { marginTop: 22 }]}
           >
@@ -324,7 +273,6 @@ export default function CadastrarMoto({ navigation }) {
               </TouchableOpacity>
             );
           })}
-
           <Text style={[styles.label, { color: colors.text }]}>Tag</Text>
           <TextInput
             style={[
@@ -344,12 +292,15 @@ export default function CadastrarMoto({ navigation }) {
               justifyContent: "center",
               paddingHorizontal: 30,
               marginBottom: 24,
+              marginTop: 8,
             }}
           >
             {loading ? (
               <ActivityIndicator color={colors.secondary} size="large" />
             ) : (
-              <Btn txt={t("Cadastrar")} pressFunc={() => cadastrarMoto()} />
+              <>
+                <Btn txt={t("Cadastrar")} pressFunc={cadastrarMoto} />
+              </>
             )}
           </View>
         </ScrollView>

@@ -1,11 +1,14 @@
 {
   "expo": {
     "name": "Tracking Code",
-    "slug": "Tracking Code",
+    "slug": "Tracking-code",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/trackingcode-icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      "expo-notifications"
+    ],
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/trackingcode-icon.png",
