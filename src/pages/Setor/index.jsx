@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Text, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { goBack } from "../../utils/navigation";

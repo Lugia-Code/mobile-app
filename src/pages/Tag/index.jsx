@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet } from "react-native";
+
 import Cabecalho from "../../_components/Cabecalho";
 import { logOut } from "../../utils/navigation";
 import ContainerScreens from "../../_components/ContainerScreens";

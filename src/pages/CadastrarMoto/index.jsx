@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -19,7 +19,6 @@ import { useTheme } from "../../context/ThemeContext";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
-const API_BASE = "http://192.168.15.3:5117/api/v1";
 const modelosDisponiveis = ["Mottu Sport", "Honda Pop 110I", "Mottu Sport ESD"];
 const setoresDisponiveis = [
   { nome: "Pronta para aluguel", icone: "checkmark-circle" },
